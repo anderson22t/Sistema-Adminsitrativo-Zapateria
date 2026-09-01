@@ -1,0 +1,1406 @@
+/* ============================================================
+   BREAKPOINT XS — Móvil pequeño (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+    header {
+        & h1{
+            font-size: 30px;
+        }
+        & ion-icon {
+            font-size: 35px;
+        }
+        & #menu {
+            margin-left: 5px;
+        }
+        & .contenedorUsuario{
+            & ion-icon{
+                font-size: 35px;
+            }
+            width: 50px;
+            & p{
+                display: none;
+            }
+        }
+    }
+    .modulos .tituloUsuario {
+        font-size: 25px;
+    }
+    .contenedorModulos {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+    .cardModulo {
+        display: block;
+        width: 90%; 
+        text-align: center;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        overflow: hidden;
+        & img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+        & h2 {
+            font-size: 20px;
+            width: 90%;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
+        }
+    }
+    .configuracionUsuario {
+        z-index: 11;
+        background-color: var(--colorIconos);
+    }
+    /*--------------------------------------------- Estilos Modulos -----------------------------*/
+    .sidebar {
+        display: none;
+    }
+    .moduloPrincipal {
+        margin-left: 0;
+    }
+    #menuModulos {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 40px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .titulo {
+        width: 100%;
+        text-align: center;
+        &.Reportes {
+            width: 100%; /* Centrado y con espacio completo */
+            font-size: 26px;
+        }
+        &.RegistroPedido{
+            font-size: 26px;
+            margin: 60px auto 30px auto;
+        }
+ 
+        &.IngresoProduccion, &.InvProduccion, &.InvMateriales {
+            width: 100%;
+            font-size: 26px;
+            margin: 60px auto 30px auto;
+        }
+        &.RegistroCompras{
+            width: 100%;
+            font-size: 22px; /* Un poco más pequeño por ser largo */
+            margin: 60px auto 30px auto;
+        }
+    }
+    .contenedorUsuario.Modulos{
+        top: 5px;
+        width: 50px;
+        & ion-icon {
+            float: right;
+        }
+
+        & p {
+            display: none;
+        }
+    }
+    .configuracionUsuario.Modulos{
+        top: 55px;
+    }
+
+    /* ---------------- Estilos Formulario Pedidos y Productos ---------------*/
+    .formularioDatosPedido, .formularioDatosProducto {
+        width: 90%;
+        height: auto;
+        margin: 0 auto 20px auto;
+        & h3 {
+            font-size: 18px; /* Título h3 más compacto en móvil */
+            padding-left: 10px;
+        }
+    }
+
+    .camposFormulario {
+        padding: 0 10px;
+        padding-bottom: 20px;
+    }
+
+    /* Reducimos el tamaño y padding de los inputs y selects para móviles (manteniendo Arial) */
+    .camposRP input, 
+    .camposRP select,
+    .camposRP .descripcionProducto,
+    .campos input,
+    .campos select {
+        padding: 8px !important;
+        font-size: 14px !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    .camposRP label,
+    .campos label {
+        font-size: 14px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .camposFormulario.producto, 
+    .camposFormulario.cliente,
+    .camposFormulario.envio  {
+        grid-template-columns: 1fr; /* Una sola columna */
+        
+    }
+
+    .camposFormulario.producto .camposRP:nth-child(2){
+        grid-column: auto; /* Quitar expansión */
+        grid-row: auto;
+    }
+
+    .botonesProductos {
+        float: none;
+        justify-content: center;
+        margin-top: 0;
+        margin-right: 0;
+        padding-bottom: 25px;
+    }
+
+    .contenedorListaProductos {
+        width: 95%;
+        margin: 0 2% 20px 2%;
+        height: auto; 
+    }
+
+    .opcionesEdicion {
+        position: static; 
+        float: right;
+        margin: 10px 0 10px 0;
+    }
+
+    .btnFormulario {
+        width: 120px;
+        height: 42px;
+        font-size: 14px;
+        padding: 0 10px;
+        border-radius: 8px;
+    }
+
+    #formularioRegistroPedido .btnFormulario.uno {
+        margin-left: auto;
+        margin-right: 5%;
+        float: none;
+        margin-bottom: 20px;
+    }
+
+    /* ---------------- Estilos Formulario Pedidos, Productos, Cliente y Envío ---------------*/
+    .formularioDatosCliente, .formularioDatosEnvio {
+        width: 90%;
+        height: auto;
+        margin: 0 auto 20px auto;
+        & h3 {
+            font-size: 18px; /* Título h3 más compacto en móvil */
+            padding-left: 10px;
+        }
+    }
+
+    .camposFormulario.cliente .camposRP:nth-child(n),
+    .camposFormulario.envio .camposRP:nth-child(n) {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    .botones,
+    .botones.dos {
+        width: 90%;
+        margin: 0 auto 20px auto;
+        padding: 0;
+    }
+
+    .botones.dos #btnEnviarPedido {
+        width: 165px;
+    }
+
+    /* ---------------- Estilos Resumen de Pedidos ---------------*/
+    .tablaResumen {
+        width: 95%;
+        margin: 0 auto 20px auto;
+    }
+
+    /* ---------------- Estilos Reportes ---------------*/
+
+    .contenedorBtnReportes {
+        width: 310px; /* Ancho optimizado para pantallas móviles */
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+        height: 40px; /* Más compacto */
+        padding: 3px;
+    }
+
+    .btnReportes {
+        width: 50%;
+        height: 100%;
+        font-size: 13px; /* Texto adaptado para móvil */
+    }
+
+    .btnMostrarFiltros {
+        display: block;
+        margin: 10px auto;
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+
+    /* Ajuste de scroll horizontal y estructura de tablas para evitar desbordamientos en celulares */
+    .tablaReportesPedidos, 
+    .tablaReportesVentas,
+    .tablaInventarioProduccion,
+    .tablaInventarioMateriales,
+    .tablaHistorialCompra {
+        display: block;
+        width: 98% !important;
+        margin-left: 1% !important;
+        margin-right: 1% !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch; /* Scroll suave en dispositivos iOS */
+    }
+
+    .filtrosReportesPedidos,
+    .filtrosReportesVentas,
+    .filtrosHistorialCompra {
+        display: none;
+        width: 90%;
+        margin-left: 5%;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .paginacion.Reportes,
+    .paginacion.Materiales,
+    .paginacion.Produccion,
+    .paginacion.HistorialCompras {
+        width: 95%;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .btnPaginacion {
+        width: 100px !important;
+        font-size: 13px !important;
+        padding: 6px !important;
+    }
+
+    .detallesPedido, .actualizarPedido {
+        width: 96%;
+        margin-left: 0;
+        left: 2%;
+        right: 2%;
+        padding: 15px 5px;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        max-height: 90%;
+    }
+
+    .contenidoPedido{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contenedorDatosCliente,
+    .contenedorDatosEnvio {
+        width: 100%;
+    }    
+
+    /* ------------------------------------------ Estilos Ingreso Produccion ---------------------*/
+    .formularioCalzado{
+        width: 95%;
+        height: auto;
+        padding: 20px;
+        gap: 15px;
+        & .campos,
+        &.Nuevo .campos {
+            grid-column: 1 / -1;
+            grid-row: auto;
+        }
+    }
+
+    /* ------------------------------------------ Inventarios ---------------------*/
+    .contenedorFiltrosMateriales, 
+    .contenedorFiltrosProduccion {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .tablaInventarioProduccion,
+    .tablaInventarioMateriales{
+        width: 98%;
+        margin-left: 1%;
+    }
+
+    .contenedorFiltrosProduccion {
+        display: none;
+        grid-template-columns: 1fr;
+    }
+
+    .titulo.InvProduccion{
+        margin-bottom: 10px;
+    }
+
+
+    /* ------------------------------------------ Compras de Materiales -----------------------------*/
+    .formularioCompras {
+        width: 95%;
+        height: auto;
+        padding: 20px;
+        gap: 15px;
+
+        & .campos {
+            grid-column: 1 / -1;
+            grid-row: auto;
+        }
+    }
+
+    .tablaHistorialCompra {
+        width: 98%;
+        margin-left: 1%;
+    }
+
+}
+
+
+/* ============================================================
+   BREAKPOINT SM — Móvil grande / Tablet pequeña (480px – 767px)
+   ============================================================ */
+@media (min-width: 480px) and (max-width: 767px) {
+
+    /* ---- Header ---- */
+    header {
+        & h1 {
+            font-size: 28px;
+        }
+        & ion-icon {
+            font-size: 35px;
+        }
+        & #menu {
+            margin-left: 10px;
+        }
+        & .contenedorUsuario {
+            width: 55px;
+            & p {
+                display: none;
+            }
+            & ion-icon {
+                font-size: 35px;
+            }
+        }
+    }
+
+    /* ---- Menú lateral (sidebar) — oculto, se activa con hamburguesa ---- */
+    .sidebar {
+        display: none;
+    }
+
+    .moduloPrincipal {
+        margin-left: 0;
+    }
+
+    /* ---- Icono hamburguesa visible en módulos ---- */
+    #menuModulos {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 38px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    /* ---- Usuario en módulos ---- */
+    .contenedorUsuario.Modulos {
+        top: 5px;
+        width: 55px;
+        & ion-icon {
+            float: right;
+        }
+        & p {
+            display: none;
+        }
+    }
+
+    .configuracionUsuario {
+        z-index: 11;
+        background-color: var(--colorIconos);
+    }
+
+    .configuracionUsuario.Modulos {
+        top: 55px;
+    }
+
+    /* ---- Página de Inicio — tarjetas de módulos en 2 columnas ---- */
+    .modulos & h2 {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .contenedorModulos {
+        width: 95%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 10px;
+        justify-items: center;
+    }
+
+
+
+    /* ---- Títulos de módulos ---- */
+    .titulo {
+        width: 90%;
+        text-align: center;
+        font-size: 32px;
+
+        &.RegistroPedido {
+            font-size: 28px;
+            margin: 55px auto 25px auto;
+        }
+        &.IngresoProduccion,
+        &.InvProduccion,
+        &.InvMateriales {
+            width: 100%;
+            font-size: 28px;
+            margin: 55px auto 25px auto;
+        }
+        &.RegistroCompras {
+            width: 100%;
+            font-size: 24px;
+            margin: 55px auto 25px auto;
+        }
+        &.Reportes {
+            width: 100%; /* Para que esté totalmente centrado en la pantalla */
+            font-size: 28px;
+            margin: 60px auto 25px auto;
+            text-align: center;
+        }
+    }
+
+    /* ---- Formularios de Pedidos y Productos ---- */
+    .formularioDatosPedido,
+    .formularioDatosProducto,
+    .formularioDatosCliente,
+    .formularioDatosEnvio {
+        width: 90%;
+        height: auto;
+        margin: 0 auto 20px auto;
+        & h3 {
+            font-size: 20px;
+            padding-left: 15px;
+        }
+    }
+
+    /* Campos del formulario de pedido en 2 columnas */
+    .formularioDatosPedido .camposFormulario {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 15px 20px 15px;
+    }
+
+    .camposFormulario {
+        padding: 0 15px 20px 15px;
+    }
+
+    /* Formularios de Pedidos, Cliente y Envío: 2 columnas */
+    .camposFormulario.producto,
+    .camposFormulario.cliente,
+    .camposFormulario.envio {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    /* Reset de posiciones absolutas de grid para evitar desbordamientos en sm */
+    .camposFormulario.producto .camposRP:nth-child(n) {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+
+    /* Cliente en 2 columnas */
+    .camposFormulario.cliente .camposRP:nth-child(1) { grid-column: 1 / 3; grid-row: 1; } /* Nombre */
+    .camposFormulario.cliente .camposRP:nth-child(2) { grid-column: 1; grid-row: 2; }     /* Correo */
+    .camposFormulario.cliente .camposRP:nth-child(3) { grid-column: 2; grid-row: 2; }     /* Teléfono */
+    .camposFormulario.cliente .camposRP:nth-child(4) { grid-column: 1; grid-row: 3; }     /* Perfil */
+    .camposFormulario.cliente .camposRP:nth-child(5) { grid-column: 2; grid-row: 3; }     /* NIT */
+
+    /* Envío en 2 columnas manteniendo el orden lógico secuencial (Opción 1) */
+    .camposFormulario.envio .camposRP:nth-child(1) { grid-column: 1 / 3; grid-row: 1; } /* Dirección (2 cols) */
+    .camposFormulario.envio .camposRP:nth-child(2) { grid-column: 1 / 3; grid-row: 2; } /* Departamento (2 cols) */
+    .camposFormulario.envio .camposRP:nth-child(3) { grid-column: 1 / 3; grid-row: 3; } /* Indicaciones (2 cols) */
+    .camposFormulario.envio .camposRP:nth-child(4) { grid-column: 1; grid-row: 4; }     /* Mensajería (Col 1) */
+    .camposFormulario.envio .camposRP:nth-child(5) { grid-column: 2; grid-row: 4; }     /* No. de Guía (Col 2) */
+    .camposFormulario.envio .camposRP:nth-child(6) { grid-column: 1; grid-row: 5; }     /* Costo Envío (Col 1) */
+    .camposFormulario.envio .camposRP:nth-child(7) { grid-column: 2; grid-row: 5; }     /* Forma de Pago (Col 2) */
+
+    .botonesProductos {
+        float: none;
+        justify-content: center;
+        margin-top: 0;
+        margin-right: 0;
+        padding-bottom: 20px;
+    }
+
+    .contenedorListaProductos {
+        width: 92%;
+        margin: 0 4% 20px 4%;
+        height: auto;
+    }
+
+    .opcionesEdicion {
+        position: static;
+        float: right;
+        margin: 10px 0;
+    }
+
+    .btnFormulario {
+        width: 130px;
+        height: 46px;
+        font-size: 15px;
+    }
+
+    #formularioRegistroPedido .btnFormulario.uno {
+        margin-left: auto;
+        margin-right: 5%;
+        float: none;
+        margin-bottom: 20px;
+    }
+
+    .botones,
+    .botones.dos {
+        width: 90%;
+        margin: 0 auto 20px auto;
+        padding: 0;
+    }
+
+    .botones.dos #btnEnviarPedido {
+        width: 180px;
+    }
+
+    /* ---- Resumen de Pedidos ---- */
+    .tablaResumen {
+        width: 96%;
+        margin-left: 2%;
+    }
+
+    /* ---- Formulario Producción (Calzado) ---- */
+    .formularioCalzado {
+        width: 90%;
+        height: auto;
+        padding: 20px 15px;
+        gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+
+        & .campos,
+        &.Nuevo .campos {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        &.Nuevo .campos:nth-child(3) {
+            grid-column: 1 / 3;
+        }
+    }
+
+    /* ---- Formulario Compras ---- */
+    .formularioCompras {
+        width: 90%;
+        height: auto;
+        padding: 20px 15px;
+        gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+
+        & .campos {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        & .campos:nth-child(1) {
+            grid-column: 1 / 3;
+        }
+    }
+
+    /* ---- Filtros Historial de Compras ---- */
+    .filtrosHistorialCompra {
+        display: none; /* Controlado por JS */
+        grid-template-columns: repeat(2, 1fr);
+        width: 90%;
+        margin-left: 5%;
+        gap: 15px;
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    /* Asegurar que cuando el JS asigne grid, se muestren */
+    .filtrosHistorialCompra[style*="display: grid"] {
+        display: grid !important;
+    }
+
+    /* ---- Tabla Historial Compras ---- */
+    .tablaHistorialCompra {
+        width: 92%;
+        margin-left: 4%;
+        overflow-x: auto;
+    }
+
+    .paginacion.HistorialCompras {
+        width: 92%;
+        margin-left: 4%;
+    }
+
+    /* ---- Filtros y Tabla Inventario Producción ---- */
+    .contenedorFiltrosProduccion {
+        grid-template-columns: repeat(3, 1fr);
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .tablaInventarioProduccion {
+        width: 92%;
+        margin-left: 4%;
+        overflow-x: auto;
+    }
+
+    .paginacion.Produccion {
+        width: 92%;
+        margin-left: 4%;
+    }
+
+    /* ---- Filtros y Tabla Inventario Materiales ---- */
+    .contenedorFiltrosMateriales {
+        flex-wrap: wrap;
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .tablaInventarioMateriales {
+        width: 92%;
+        margin-left: 4%;
+        overflow-x: auto;
+    }
+
+    .paginacion.Materiales {
+        width: 92%;
+        margin-left: 4%;
+    }
+
+    /* ---- Reportes ---- */
+    .contenedorBtnReportes {
+        width: 420px; /* Ancho intermedio más amplio */
+        max-width: 90%; /* Evita desbordamiento si la pantalla es menor */
+        margin: 0 auto 20px auto;
+        height: 48px; /* Un poco más alto */
+        padding: 4px;
+    }
+ 
+    .btnReportes {
+        width: 50%;
+        height: 100%;
+        font-size: 15px;
+    }
+
+    .btnMostrarFiltros {
+        display: block;
+        margin: 10px auto;
+    }
+
+    .filtrosReportesPedidos,
+    .filtrosReportesVentas {
+        grid-template-columns: repeat(2, 1fr);
+        width: 90%;
+        margin-left: 5%;
+        gap: 15px;
+    }
+
+    .tablaReportesPedidos,
+    .tablaReportesVentas {
+        width: 92%;
+        margin-left: 4%;
+        overflow-x: auto;
+    }
+
+    .paginacion.Reportes {
+        width: 92%;
+        margin-left: 4%;
+    }
+
+    /* ---- Detalles de Pedido ---- */
+    .detallesPedido, .actualizarPedido {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 94%;
+        margin-left: 0;
+        max-height: 90%;
+        padding: 15px 5px;
+    }
+
+    .contenidoPedido {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contenedorDatosCliente,
+    .contenedorDatosEnvio {
+        width: 100%;
+    }
+
+}
+
+
+/* ============================================================
+   BREAKPOINT MD — Tablet / iPad (768px – 1023px)
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    /* ---- Header ---- */
+    header {
+        & h1 {
+            font-size: 32px;
+        }
+        & ion-icon {
+            font-size: 38px;
+        }
+        & #menu {
+            margin-left: 15px;
+        }
+        & .contenedorUsuario {
+            width: 60px;
+            & p {
+                display: none;
+            }
+            & ion-icon {
+                font-size: 38px;
+            }
+        }
+    }
+
+    /* ---- Sidebar & Menú hamburguesa (Oculto y activable por JS) ---- */
+    .sidebar {
+        display: none;
+    }
+
+    .moduloPrincipal {
+        margin-left: 0;
+    }
+
+    #menuModulos {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 40px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .contenedorUsuario.Modulos {
+        top: 10px;
+        width: 60px;
+        & ion-icon {
+            float: right;
+        }
+        & p {
+            display: none;
+        }
+    }
+
+    .configuracionUsuario {
+        z-index: 11;
+        background-color: var(--colorIconos);
+    }
+
+    .configuracionUsuario.Modulos {
+        top: 65px;
+    }
+
+    /* ---- Página de Inicio (Módulos del Sistema) ---- */
+    .modulos & h2 {
+        font-size: 28px;
+    }
+
+    .contenedorModulos {
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        justify-items: center;
+    }
+
+
+
+    /* ---- Títulos ---- */
+    .titulo {
+        width: 90%;
+        text-align: center;
+        font-size: 36px;
+        margin: 60px auto 30px auto;
+
+        &.RegistroPedido,
+        &.IngresoProduccion,
+        &.InvProduccion,
+        &.InvMateriales,
+        &.RegistroCompras,
+        &.Reportes {
+            width: 100%;
+            margin: 60px auto 30px auto;
+            text-align: center;
+        }
+    }
+
+    /* ---- Formularios de Pedidos, Productos, Clientes y Envío ---- */
+    .formularioDatosPedido,
+    .formularioDatosProducto,
+    .formularioDatosCliente,
+    .formularioDatosEnvio {
+        width: 85%;
+        height: auto;
+        margin: 0 auto 25px auto;
+        & h3 {
+            font-size: 22px;
+            padding-left: 20px;
+        }
+    }
+
+    .camposFormulario {
+        padding: 0 20px 25px 20px;
+        gap: 15px;
+    }
+
+    /* Campos en 3 columnas en lugar de 1 o de 4 en desktop */
+    .formularioDatosPedido .camposFormulario {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .camposFormulario.producto {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .camposFormulario.producto .camposRP:nth-child(2) {
+        grid-column: span 2;
+        grid-row: auto;
+    }
+
+    .camposFormulario.cliente,
+    .camposFormulario.envio {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    /* Cliente en 3 columnas simétricas */
+    .camposFormulario.cliente .camposRP:nth-child(1) { grid-column: 1 / 3; grid-row: 1; } /* Nombre (2 cols) */
+    .camposFormulario.cliente .camposRP:nth-child(2) { grid-column: 3; grid-row: 1; }     /* Correo (1 col) */
+    .camposFormulario.cliente .camposRP:nth-child(3) { grid-column: 1; grid-row: 2; }     /* Teléfono */
+    .camposFormulario.cliente .camposRP:nth-child(4) { grid-column: 2; grid-row: 2; }     /* Perfil */
+    .camposFormulario.cliente .camposRP:nth-child(5) { grid-column: 3; grid-row: 2; }     /* NIT */
+
+    /* Envío en 3 columnas manteniendo el orden lógico secuencial (Opción 1) */
+    .camposFormulario.envio .camposRP:nth-child(1) { grid-column: 1 / 3; grid-row: 1; } /* Dirección (2 cols) */
+    .camposFormulario.envio .camposRP:nth-child(2) { grid-column: 3; grid-row: 1; }     /* Departamento (1 col) */
+    .camposFormulario.envio .camposRP:nth-child(3) { grid-column: 1 / 4; grid-row: 2; } /* Indicaciones (3 cols completa) */
+    .camposFormulario.envio .camposRP:nth-child(4) { grid-column: 1; grid-row: 3; }     /* Mensajería (Col 1) */
+    .camposFormulario.envio .camposRP:nth-child(5) { grid-column: 2; grid-row: 3; }     /* No. de Guía (Col 2) */
+    .camposFormulario.envio .camposRP:nth-child(6) { grid-column: 3; grid-row: 3; }     /* Costo Envío (Col 3) */
+    .camposFormulario.envio .camposRP:nth-child(7) { grid-column: 1 / 4; grid-row: 4; } /* Forma de Pago (3 cols) */
+
+    .botonesProductos {
+        float: none;
+        justify-content: flex-end;
+        margin-right: 7.5%;
+        padding-bottom: 25px;
+        gap: 15px;
+    }
+
+    .contenedorListaProductos {
+        width: 85%;
+        margin-left: 7.5%;
+        height: auto;
+    }
+
+    .btnFormulario {
+        width: 135px;
+        height: 48px;
+        font-size: 16px;
+    }
+
+    #formularioRegistroPedido .btnFormulario.uno {
+        margin-left: auto;
+        margin-right: 7.5%;
+        float: none;
+        margin-bottom: 25px;
+    }
+
+    /* Botones de control al pie de los formularios */
+    .botones,
+    .botones.dos {
+        width: 85%;
+        margin: 0 auto 25px auto;
+        padding: 0;
+    }
+
+    .botones.dos #btnEnviarPedido {
+        width: 190px;
+    }
+
+    /* ---- Resumen de Pedidos ---- */
+    .tablaResumen {
+        width: 85%;
+        margin: 0 auto 30px auto;
+    }
+
+    /* ---- Formulario Producción (Calzado) ---- */
+    .formularioCalzado {
+        width: 80%;
+        height: auto;
+        padding: 25px;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+
+        &.Nuevo .campos:nth-child(3) {
+            grid-column: span 2;
+        }
+    }
+
+    /* ---- Formulario Compras ---- */
+    .formularioCompras {
+        width: 80%;
+        height: auto;
+        padding: 25px;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+
+        & .campos:nth-child(1) {
+            grid-column: span 2;
+        }
+    }
+
+    /* ---- Filtros Historial de Compras ---- */
+    .filtrosHistorialCompra {
+        display: none; /* Controlado por JS */
+        grid-template-columns: repeat(3, 1fr);
+        width: 85%;
+        margin: 25px auto;
+        gap: 15px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .filtrosHistorialCompra[style*="display: grid"] {
+        display: grid !important;
+    }
+
+    .tablaHistorialCompra {
+        width: 85%;
+        margin: 0 auto 40px auto;
+    }
+
+    .paginacion.HistorialCompras {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    /* ---- Inventarios ---- */
+    .contenedorFiltrosProduccion {
+        grid-template-columns: repeat(3, 1fr);
+        width: 85%;
+        margin: 25px auto;
+    }
+
+    .tablaInventarioProduccion {
+        width: 85%;
+        margin: 0 auto 40px auto;
+    }
+
+    .paginacion.Produccion {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .contenedorFiltrosMateriales {
+        width: 85%;
+        margin: 25px auto;
+        justify-content: center;
+    }
+
+    .tablaInventarioMateriales {
+        width: 85%;
+        margin: 0 auto 40px auto;
+    }
+
+    .paginacion.Materiales {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .contenedorBtnReportes {
+        width: 410px;
+    }
+
+    .btnMostrarFiltros {
+        display: block;
+        margin: 15px auto;
+    }
+
+    .filtrosReportesPedidos {
+        display: none;
+        grid-template-columns: repeat(3, 1fr);
+        width: 85%;
+        margin: 25px auto;
+    }
+
+    .filtrosReportesVentas {
+        display: none;
+        grid-template-columns: repeat(3, 1fr);
+        width: 85%;
+        margin: 25px auto;
+    }
+
+    .tablaReportesPedidos,
+    .tablaReportesVentas {
+        width: 85%;
+        margin: 0 auto 40px auto;
+    }
+
+    .paginacion.Reportes {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .detallesPedido, .actualizarPedido {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        margin-left: 0;
+        max-height: 90%;
+        padding: 20px;
+    }
+
+}
+
+
+/* ============================================================
+   BREAKPOINT LG — Laptop (1024px – 1279px)
+   ============================================================ */
+@media (min-width: 1024px) and (max-width: 1279px) {
+
+    /* ---- Header ---- */
+    header {
+        & h1 {
+            font-size: 36px;
+        }
+        & .contenedorUsuario {
+            width: 160px;
+            & p {
+                display: block;
+                font-size: 16px;
+            }
+        }
+    }
+
+    /* ---- Sidebar & Sección principal (Siempre visible en pantallas LG) ---- */
+    .sidebar {
+        display: block;
+        width: 250px;
+    }
+
+    .moduloPrincipal {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    #menuModulos {
+        display: none;
+    }
+
+    .contenedorUsuario.Modulos {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        width: 160px;
+        & p {
+            display: block;
+            font-size: 16px;
+        }
+    }
+
+    .configuracionUsuario.Modulos {
+        top: 80px;
+        right: 15px;
+    }
+
+    /* ---- Página de Inicio (Módulos del Sistema) ---- */
+    .contenedorModulos {
+        width: 85%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+
+
+    /* ---- Títulos ---- */
+    .titulo {
+        font-size: 40px;
+        margin-left: 50px;
+        margin-top: 40px;
+
+        &.RegistroPedido {
+            font-size: 40px;
+            margin-left: 50px;
+            margin-top: 40px;
+        }
+        &.IngresoProduccion,
+        &.InvProduccion,
+        &.InvMateriales,
+        &.RegistroCompras,
+        &.Reportes {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    }
+
+    /* ---- Formularios (Pedidos, Productos, Clientes, Envíos) ---- */
+    .formularioDatosPedido,
+    .formularioDatosProducto,
+    .formularioDatosCliente,
+    .formularioDatosEnvio {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-bottom: 25px;
+    }
+
+    /* Diseño Grid fluido de 3 columnas para pedidos y clientes */
+    .formularioDatosPedido .camposFormulario {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .camposFormulario.producto {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .camposFormulario.cliente {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .camposFormulario.cliente .camposRP:nth-child(n) {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+    .camposFormulario.cliente .camposRP:nth-child(1) {
+        grid-column: span 2;
+    }
+
+    .camposFormulario.envio {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .camposFormulario.envio .camposRP:nth-child(n) {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+    .camposFormulario.envio .camposRP:nth-child(1),
+    .camposFormulario.envio .camposRP:nth-child(3) {
+        grid-column: span 2;
+    }
+
+    .botonesProductos {
+        margin-right: 50px;
+        padding-bottom: 25px;
+    }
+
+    .contenedorListaProductos {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    #formularioRegistroPedido .btnFormulario.uno {
+        margin-left: auto;
+        margin-right: 50px;
+        float: none;
+        margin-bottom: 25px;
+    }
+
+    .botones,
+    .botones.dos {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+        margin-right: 50px;
+        padding: 0;
+    }
+
+    /* Resumen del pedido */
+    .tablaResumen {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    /* ---- Formulario Producción (Calzado) ---- */
+    .formularioCalzado {
+        width: 600px;
+        height: auto;
+        padding: 30px;
+    }
+
+    /* ---- Formulario Compras ---- */
+    .formularioCompras {
+        width: 600px;
+        height: auto;
+        padding: 30px;
+    }
+
+    /* ---- Filtros Historial de Compras ---- */
+    .filtrosHistorialCompra {
+        display: none; /* Controlado por JS */
+        grid-template-columns: repeat(4, 1fr);
+        width: calc(100% - 100px);
+        margin-left: 50px;
+        gap: 15px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .filtrosHistorialCompra[style*="display: grid"] {
+        display: grid !important;
+    }
+
+    .tablaHistorialCompra {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    .paginacion.HistorialCompras {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    /* ---- Inventarios ---- */
+    .contenedorFiltrosProduccion {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: calc(100% - 100px);
+        margin-left: 50px;
+        gap: 15px;
+    }
+
+    .tablaInventarioProduccion {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    .paginacion.Produccion {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    .contenedorFiltrosMateriales {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    .tablaInventarioMateriales {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    .paginacion.Materiales {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    /* ---- Reportes ---- */
+    .contenedorBtnReportes {
+        width: 410px;
+    }
+
+    /* Mostrar el botón disparador de filtros en LG */
+    .btnMostrarFiltros {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: 15px 50px;
+        width: fit-content;
+        padding: 8px 15px;
+        border-radius: 6px;
+        background-color: var(--colorBtnNaranja);
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Ocultamos los filtros por defecto y los mostramos en 4 columnas */
+    .filtrosReportesPedidos,
+    .filtrosReportesVentas {
+        display: none; /* Controlado por JS */
+        grid-template-columns: repeat(4, 1fr);
+        width: calc(100% - 100px);
+        margin-left: 50px;
+        gap: 15px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Asegurar que cuando el JS asigne grid, se muestren */
+    .filtrosReportesPedidos[style*="display: grid"],
+    .filtrosReportesVentas[style*="display: grid"] {
+        display: grid !important;
+    }
+
+    .tablaReportesPedidos,
+    .tablaReportesVentas {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    .paginacion.Reportes {
+        width: calc(100% - 100px);
+        margin-left: 50px;
+    }
+
+    /* ---- Detalles de Pedido y Actualización ---- */
+    .detallesPedido, .actualizarPedido {
+        position: fixed;
+        top: 50%;
+        left: calc(50% + 125px); /* Desplazamos 125px (la mitad de los 250px del sidebar) para centrarlo en el área libre */
+        transform: translate(-50%, -50%);
+        width: 60%;
+        max-width: 800px;
+        margin-left: 0;
+        max-height: 85%;
+        padding: 25px;
+    }
+
+}
+
+

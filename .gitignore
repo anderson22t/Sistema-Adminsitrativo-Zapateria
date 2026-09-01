@@ -1,0 +1,25 @@
+# Archivos con credenciales / de prueba
+php/configuraciones/usuario.php
+php/prueba.php
+
+# Configuraciones locales de base de datos
+db_config.php
+config.php
+.env
+
+# Archivos de logs
+*.log
+logs/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuración de IDEs (Visual Studio Code, IntelliJ, etc.)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
