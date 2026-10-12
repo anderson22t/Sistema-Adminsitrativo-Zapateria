@@ -12,7 +12,7 @@ El proyecto permite administrar de forma integral los procesos de negocio de la 
 Gestiona el registro de pedidos mediante un formulario de múltiples pasos. Incluye datos del pedido (período, tipo y canal de venta, vendedor, fechas de pedido y entrega), productos solicitados (código, color, talla, cantidad y precio), datos del cliente (nombre, correo, teléfono, NIT, perfil) e información de envío (dirección, departamento, mensajería, costo, forma de pago). Presenta un resumen antes de confirmar el pedido.
 
 ### Producción
-Administra dos secciones: **Catálogo de Calzados**, que permite registrar y gestionar modelos (código, tipo, línea, descripción, precio costo y estado activo/inactivo); y  **Historial de Producción**, que registra cada lote fabricado con fecha, código de calzado, color, talla y cantidad.
+Administra dos secciones: **Catálogo de Calzados**, que permite registrar y gestionar modelos (código, tipo, línea, descripción, precio costo y estado activo/inactivo); e **Historial de Producción**, que registra cada lote fabricado con fecha, código de calzado, color, talla y cantidad.
 
 ### Compra de Materiales
 Registra las compras de materiales para la fabricación con información de descripción, cantidad, precio total, comprador, proveedor, fecha de compra y número de comprobante. Permite consultar y filtrar el historial de compras por descripción, proveedor, comprador y fecha.
@@ -24,7 +24,7 @@ Consulta las existencias de calzado producido organizadas por código, descripci
 Consulta el stock de materiales disponibles (código, descripción y cantidad), con búsqueda por descripción y paginación.
 
 ### Reportes
-Contiene dos vistas: **Reporte de Pedidos**, que muestra el estado, fechas y datos de entrega de cada pedido con posibilidad de consultar el detalle completo y actualizar el estado; y el Reporte de Ventas, que presenta un resumen de ventas por forma de pago  con cantidades y montos por período.
+Contiene dos vistas: **Reporte de Pedidos**, que muestra el estado, fechas y datos de entrega de cada pedido con posibilidad de consultar el detalle completo y actualizar el estado; y **Reporte de Ventas**, que presenta un resumen de ventas por forma de pago  con cantidades y montos por período.
 
 ### Inteligencia de Negocios
 Incorpora un módulo de inteligencia de negocios compuesto por dos dashboards interactivos para el análisis de ventas. El dashboard de Análisis General de Ventas presenta una visión consolidada del comportamiento de las ventas mediante indicadores clave, comparaciones entre periodos y gráficos que permiten identificar tendencias. Por su parte, el dashboard de Análisis Específico por Producto permite examinar el desempeño de un modelo de calzado seleccionado, analizando sus ventas según tallas y colores para identificar las variantes con mayor demanda.
@@ -74,7 +74,7 @@ Ambos dashboards cuentan con filtros por periodo, canal y tipo de venta, lo que 
 
 ### Ingreso de producción
 
-![Ingreso de producción](capturas/Produccion.png)
+![Ingreso de producción](capturas/produccion.png)
 
 ### Inventario de producción
 
