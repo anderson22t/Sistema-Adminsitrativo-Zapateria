@@ -2,32 +2,19 @@ const btnReportePedidos = document.getElementById("btnReportePedidos");
 const btnReporteVenta = document.getElementById("btnReporteVenta");
 const reportesPedidos = document.querySelector(".reportesPedidos");
 const reportesVentas = document.querySelector(".reportesVentas");
-const btnMenuModulos = document.getElementById("menuModulos");
-const sidebar = document.querySelector(".sidebar");
 const btnMostrarFiltrosPedidos = document.getElementById("mostrarFiltrosPedidos");
 const filtrosReportesPedidos = document.querySelector(".filtrosReportesPedidos");
 const btnMostrarFiltrosVentas = document.getElementById("mostrarFiltrosVentas");
 const filtrosReportesVentas = document.querySelector(".filtrosReportesVentas");
 
-btnMenuModulos.addEventListener("click", function (){
-    sidebar.style.display = "block";
-    sidebar.style.zIndex = "1000";
-});
-
 btnMostrarFiltrosPedidos.addEventListener("click", function(){
-    if (filtrosReportesPedidos.style.display === "grid") {
-        filtrosReportesPedidos.style.display = "none";
-    } else {
-        filtrosReportesPedidos.style.display = "grid";
-    }
+    filtrosReportesPedidos.hidden = !filtrosReportesPedidos.hidden;
+    btnMostrarFiltrosPedidos.setAttribute("aria-expanded", String(!filtrosReportesPedidos.hidden));
 });
 
 btnMostrarFiltrosVentas.addEventListener("click", function(){
-    if (filtrosReportesVentas.style.display === "grid") {
-        filtrosReportesVentas.style.display = "none";
-    } else {
-        filtrosReportesVentas.style.display = "grid";
-    }
+    filtrosReportesVentas.hidden = !filtrosReportesVentas.hidden;
+    btnMostrarFiltrosVentas.setAttribute("aria-expanded", String(!filtrosReportesVentas.hidden));
 });
 
 const botones = [btnReportePedidos, btnReporteVenta];
@@ -82,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return `${día}/${mes}/${año}`;
     }
 
-    fetch(`../../php/configuraciones/seleccionPedido.php?${params.toString()}`)
+    fetch(`../../php/configuraciones/consultarDatos/seleccionPedido.php?${params.toString()}`)
       .then((response) => response.json())
       .then((data) => {
         const { datos, totalPaginas, paginaActual: paginaResp } = data;
@@ -105,10 +92,19 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td>${fila.nombreCliente}</td>
                         <td>${fila.direccionCompleta}</td>
                         <td>${formatearFecha(fila.fechaEntrega)}</td>
-                        <td><button class="btnVerDetalles">Ver Detalles</button></td>
                         <td><span class="${claseEstado}">${fila.estado}</span></td>
-                        <td><img src="../../componentes/iconos/editar.svg" id="Editar" class="iconoEditar">
-                            <ion-icon name="trash-outline" id="Eliminar" class="iconoEliminar"></ion-icon>
+                        <td>
+                          <div class="contenedorAcciones">
+                              <button type="button" class="btnVerDetalles btn-action-icon" title="Ver Detalles">
+                                  <ion-icon name="eye-outline"></ion-icon>
+                              </button>
+                              <button type="button" class="iconoEditar btn-action-icon" title="Editar">
+                                  <ion-icon name="create-outline"></ion-icon>
+                              </button>
+                              <button type="button" class="iconoEliminar btn-action-icon" title="Eliminar">
+                                  <ion-icon name="trash-outline"></ion-icon>
+                              </button>
+                          </div>
                         </td>
                     `;
           tablaReportePedido.appendChild(tr);
@@ -161,8 +157,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.getElementById("btnFiltroPedidos").addEventListener("click", function(){
     const inputFecha = document.getElementById("filtroFechaPedido").value;
-    console.log(inputFecha);
-    
 })
 
 function mostrarReporteVenta() {
@@ -180,7 +174,7 @@ function mostrarReporteVenta() {
       p: pagina,
       ...filtros,
     });
-    fetch(`../../php/configuraciones/reportesVentas.php?${params.toString()}`)
+    fetch(`../../php/configuraciones/consultarDatos/reportesVentas.php?${params.toString()}`)
       .then((response) => response.json())
       .then((data) => {
         const { datos, totalPaginas, paginaActual: paginaResp } = data;

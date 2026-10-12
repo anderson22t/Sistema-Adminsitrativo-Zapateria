@@ -1,9 +1,11 @@
 <?php
+require_once '../configuraciones/rutas/ruta.php';
+
 session_start(); // Iniciar la sesión
 //Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
   // Si no ha iniciado sesión, redirigir a la página de inicio de sesión
-  header("Location: ../../html/index.html");
+  header("Location: ../../index.html");
   exit();
 }
 ?>
@@ -13,7 +15,8 @@ if (!isset($_SESSION['usuario_id'])) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zapatería</title>
+    <title>Dashboard Análisis General</title>
+    <link rel="icon" type="image/png" href="../../componentes/iconos/favicon-32x32.png" />
     <link rel="stylesheet" href="../../css/estilos.css" />
     <link rel="stylesheet" href="../../css/responsive.css" />
     <link rel="stylesheet" href="../../css/dashboard.css" />
@@ -31,16 +34,26 @@ if (!isset($_SESSION['usuario_id'])) {
   <body>
     <?php include 'sidebarModulos.php' ?>
     <section class="moduloPrincipal">
-      <ion-icon name="menu" id="menuModulos"></ion-icon>
-      <h1 class="titulo Dashboard">Análisis General de Ventas</h1>
-      <div class="filtrosDashboard General">
-        <div class="filtrosRango">
-            <button id="btnFiltroHoy" class="btnFiltrosGenerales" value="Hoy"> Hoy </button>
-            <button id="btnFiltroSemana" class="btnFiltrosGenerales" value="Semana"> Semana </button>
-            <button id="btnFiltroMes" class="btnFiltrosGenerales" value="Mes"> Mes </button>
-            <button id="btnFiltroAnio" class="btnFiltrosGenerales" value="Año"> Año </button>
+      <header class="headerModulo">
+        <div class="headerModuloIzquierda">
+          <ion-icon name="menu" id="menuModulos"></ion-icon>
+          <h1 class="titulo Dashboard">Análisis General de Ventas</h1>
         </div>
-        <div class="filtrosAcciones">
+        <?php include 'usuarioModulos.php'; ?>
+      </header>
+      <div class="filtrosDashboard General">
+        <div class="filtrosBarraPrincipal">
+          <div class="filtrosRango">
+              <button id="btnFiltroHoy" class="btnFiltrosGenerales" value="Hoy"> Hoy </button>
+              <button id="btnFiltroSemana" class="btnFiltrosGenerales" value="7dias">Últimos 7 días</button>
+              <button id="btnFiltroMes" class="btnFiltrosGenerales" value="30dias">Últimos 30 días</button>
+          </div>
+          <button type="button" id="btnToggleAcciones" class="btnToggleAcciones" title="Ver más opciones" aria-expanded="false">
+            <span>Opciones</span>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </button>
+        </div>
+        <div class="filtrosAcciones" id="filtrosAcciones">
           <button type="button" id="btnFiltrosAvanzados" class="btnFiltrosAvanzados">
             <ion-icon name="filter-outline"></ion-icon>
             Filtros Avanzados
@@ -51,7 +64,28 @@ if (!isset($_SESSION['usuario_id'])) {
           </button>
         </div>
       </div>
-
+      <!-- Banner de Contexto y Período -->
+      <div class="bannerDashboard info" id="bannerDashboardGeneral">
+        <div class="encabezadoBanner" >
+          <span class="bannerTitulo" id="bannerTitulo">Detalles de Consulta:</span>
+          <span><ion-icon name="chevron-down-outline" id="iconoFiltroBanner"></ion-icon></span>
+        </div>
+        <div class="opcionBanner" id="opcionPeriodoBanner">
+          <span class="iconoOpcion" id="iconoPeriodo"></span>
+          <span class="leyendaOpcion" id="leyendaPeriodo"></span>
+          <span class="bannerBadgeFechas" id="opcionPeriodo"></span>
+        </div> 
+        <div class="opcionBanner" id="opcionCanalVentaBanner">
+          <span class="iconoOpcion" id="iconoCanalVenta"><ion-icon name="storefront-outline"></ion-icon></span>
+          <span class="leyendaOpcion">Canal de Venta: </span>
+          <span class="bannerTexto" id="opcionCanalVenta"></span>
+        </div>
+        <div class="opcionBanner" id="opcionTipoVentaBanner">
+          <span class="iconoOpcion"><ion-icon name="pricetag-outline"></ion-icon></span>
+          <span class="leyendaOpcion">Tipo de Venta: </span>
+          <span class="bannerTexto" id="opcionTipoVenta"></span>
+        </div>                
+      </div>
       <!-- Overlay para el Panel Lateral de Filtros -->
       <div class="overlayFiltros" id="overlayFiltros"></div>
 
@@ -81,7 +115,7 @@ if (!isset($_SESSION['usuario_id'])) {
               </label>
               <select name="canalVenta" id="canalVenta">
                 <option value="">Todos los Canales de Venta</option>
-                <?php include '../configuraciones/dashboard/canalesVenta.php'; ?>
+                <?php include '../configuraciones/dashboard/filtros/canalesVenta.php'; ?>
               </select>
             </div>
             <div class="camposfiltros">
@@ -91,26 +125,16 @@ if (!isset($_SESSION['usuario_id'])) {
               </label>
               <select name="tipoVenta" id="tipoVenta">
                 <option value="">Todos los Tipos de Venta</option>
-                <?php include '../configuraciones/dashboard/tiposVenta.php'; ?>
+                <?php include '../configuraciones/dashboard/filtros/tiposVenta.php'; ?>
               </select>
             </div>
-            <div class="camposfiltros">
-              <label for="anio">
-                <ion-icon name="calendar-outline"></ion-icon>
-                <span>Año</span>
-              </label>
-              <select name="anio" id="anio">
-                <option value="">Seleccionar Año</option>
-                <?php include '../configuraciones/dashboard/anioVenta.php'; ?>
-              </select>
-            </div>          
             <div class="camposfiltros">
               <label for="filtroMes">
                 <ion-icon name="calendar-number-outline"></ion-icon>
                 <span>Mes</span>
               </label>
               <select name="filtroMes" id="filtroMes">
-                <option value="">Todos los Meses</option>
+                <option value="">Seleccionar mes</option>
                 <option value="1">Enero</option>
                 <option value="2">Febrero</option>
                 <option value="3">Marzo</option>
@@ -125,6 +149,16 @@ if (!isset($_SESSION['usuario_id'])) {
                 <option value="12">Diciembre</option>
               </select>
             </div>
+            <div class="camposfiltros">
+              <label for="anio">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <span>Año</span>
+              </label>
+              <select name="anio" id="anio">
+                <option value="">Seleccionar Año</option>
+                <?php include '../configuraciones/dashboard/filtros/anioVenta.php'; ?>
+              </select>
+            </div>          
           </div>
 
           <div class="footerFiltros">
@@ -148,7 +182,8 @@ if (!isset($_SESSION['usuario_id'])) {
           </div>
           <span class="datoConsultado" id="totalVentas">Q 1,000.00</span>
           <div class="comparativa">
-            <span id="comparativaVentas"> +10% vs ayer</span>
+            <span class="comparativaIcono" id="iconoVentaTotal"></span>
+            <span id="comparativaVentas"> +10% vs ayer </span>
           </div>
         </div>
         <div class="cardKPI">
@@ -158,7 +193,8 @@ if (!isset($_SESSION['usuario_id'])) {
           </div>
           <span class="datoConsultado" id="totalPedidos"> 1,000</span>
           <div class="comparativa">
-            <span id="comparativaPedidos"> +10% vs ayer</span>
+            <span class="comparativaIcono" id="iconoTotalPedidos"></span>
+            <span id="comparativaPedidos"> + 10% vs ayer</span>
           </div>
         </div>
         <div class="cardKPI">
@@ -168,6 +204,7 @@ if (!isset($_SESSION['usuario_id'])) {
           </div>
           <span class="datoConsultado" id="totalParesVendidos">1,000 pares</span>
           <div class="comparativa">
+            <span class="comparativaIcono" id="iconoTotalPares"></span>
             <span id="comparativaParesVendidos"> +10% vs ayer</span>
           </div>
         </div> 
@@ -178,39 +215,66 @@ if (!isset($_SESSION['usuario_id'])) {
           </div>
           <span class="datoConsultado" id="ticketPromedio">Q 1,000.00</span>
           <div class="comparativa">
+            <span class="comparativaIcono" id="iconoTicketPromedio"></span>
             <span id="comparativaTicketPromedio"> +10% vs ayer</span>
           </div>
         </div>                       
       </div>
       <div class="graficos Primarios">
         <div class="cardGrafico">
-          <h3 class="tituloGrafico">Evolución de Ventas</h3>
-          <p id="descripcionEvolucion"></p>
-          <div id="graficoVentas"></div>  
+          <div class="graficoHeader">
+            <h3 class="tituloGrafico">Evolución de Ventas</h3>
+            <p id="descripcionEvolucion">Comparativa: 5 Días Anteriores vs Últimos 5 Días</p>
+          </div>
+          <div class="contenedorGrafico" id="graficoVentas"></div>  
         </div>
         <div class="cardGrafico">
-          <h3 class="tituloGrafico">Ventas por Categoría</h3>
-          <div id="graficoVentasCategoria"></div>  
+          <div class="graficoHeader">
+            <h3 class="tituloGrafico">Ventas por Categoría</h3>
+          </div>
+          <div class="contenedorGrafico" id="graficoVentasCategoria"></div>  
         </div>        
       </div>
       <div class="graficos Secundarios">
         <div class="cardGrafico">
-          <h3 class="tituloGrafico">Top 5 Calzados Más Vendidos</h3>
-          <div id="graficoTop5Calzados"></div>  
+          <div class="graficoHeader">
+            <h3 class="tituloGrafico">Top 5 Calzados Más Vendidos</h3>
+          </div>
+          <div class="contenedorGrafico" id="graficoTop5Calzados">
+            <div class="tablaTopCalzadosContenedor">
+              <table id="tablaTopCalzados">
+                  <thead>
+                      <tr>
+                          <th>Código</th>
+                          <th>Calzado</th>
+                          <th>Categoría</th>
+                          <th>Cantidad Vendida</th>
+                          <th>Total Vendido</th>
+                      </tr>
+                  </thead>
+                  <tbody id="datosTablaTopCalzados">
+                      
+                  </tbody>
+              </table>
+            </div>
+          </div>  
         </div>
         <div class="cardGrafico">
-          <h3 class="tituloGrafico">Ventas por Talla</h3>
-          <div id="graficoVentasTalla"></div>  
+          <div class="graficoHeader">
+            <h3 class="tituloGrafico">Ventas por Talla</h3>
+          </div>
+          <div class="contenedorGrafico" id="graficoVentasTalla"></div>  
         </div>        
       </div>
 
     </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../js/alertas.js"></script>
-    <script src="../../js/scriptDashboard.js"></script>
-    <script src="../../js/scriptReportes.js"></script>
-    <script src="../../js/detallesPedido.js"></script>
-    <script src="../../js/actualizarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+    <script src="../../js/funcionesDashboards.js"></script>
+    <script src="../../js/scriptDashboardGeneral.js"></script>
+    <script src="../../js/PDFGeneral.js"></script>
     <script src="../../js/cerrarSesionModulos.js"></script>
     <script
     type="module"

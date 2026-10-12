@@ -26,7 +26,7 @@ document.addEventListener("click", (e) => {
 });
 
 document.getElementById('cerrarSesion').addEventListener("click", function(){
-    window.location.href = '../configuraciones/cerrarSesion.php';
+    window.location.href = '../configuraciones/usuarios/cerrarSesion.php';
 });
 
 

@@ -1,11 +1,17 @@
 <?php
-require_once __DIR__ . '/../../../../configuracion/db_config.php'; // Ruta al archivo de configuración
+session_start();
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: ../../index.html');
+    exit();
+}
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../configuracion/db_config.php';
 
 $conn = new mysqli($host, $usuario, $contraseña, $baseDeDatos);
 
-// Verificar la conexión
 if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    header('Location: ../vistas/compraMateriales.php?status=error');
+    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
@@ -70,7 +76,7 @@ function verificarExistencia($tabla, $campoId, $atributo, $valor){
 }
 
 function actualizarInventario ($conn, $idMaterial, $cantidadNueva) {
-    $revisionInventario = $conn->prepare("SELECT CantidadActual FROM InventarioMateriales WHERE idMaterial =?");
+    $revisionInventario = $conn->prepare("SELECT CantidadActual FROM inventariomateriales WHERE idMaterial =?");
     $revisionInventario->bind_param("i", $idMaterial);
     $revisionInventario->execute();
     $resultadoRevision = $revisionInventario->get_result();
@@ -80,12 +86,12 @@ function actualizarInventario ($conn, $idMaterial, $cantidadNueva) {
         $fila = $resultadoRevision->fetch_assoc();
         $nuevaCantidad = $fila['CantidadActual'] + $cantidadNueva;
         
-        $actualizarInventario = $conn->prepare("UPDATE InventarioMateriales SET CantidadActual =? WHERE idMaterial =?");
+        $actualizarInventario = $conn->prepare("UPDATE inventariomateriales SET CantidadActual =? WHERE idMaterial =?");
         $actualizarInventario->bind_param("ii", $nuevaCantidad, $idMaterial);
         $actualizarInventario->execute();
     } else {
         //Si no existe, ingresar el material a inventario
-        $ingresoInventario = $conn->prepare("INSERT INTO InventarioMateriales (idMaterial, CantidadActual) VALUES (?, ?)");
+        $ingresoInventario = $conn->prepare("INSERT INTO inventariomateriales (idMaterial, CantidadActual) VALUES (?, ?)");
         $ingresoInventario->bind_param("ii", $idMaterial, $cantidadNueva);
         $ingresoInventario->execute();
     }

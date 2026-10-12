@@ -3,7 +3,7 @@ session_start(); // Iniciar la sesión
 //Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
   // Si no ha iniciado sesión, redirigir a la página de inicio de sesión
-  header("Location: ../../html/index.html");
+  header("Location: ../../index.html");
   exit();
 }
 ?>
@@ -12,7 +12,8 @@ if (!isset($_SESSION['usuario_id'])) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zapatería</title>
+    <title>Inventario Materiales</title>
+    <link rel="icon" type="image/png" href="../../componentes/iconos/favicon-32x32.png" />
     <link rel="stylesheet" href="../../css/estilos.css" />
     <link rel="stylesheet" href="../../css/responsive.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,38 +30,58 @@ if (!isset($_SESSION['usuario_id'])) {
   <body>
     <?php include '../vistas/sidebarModulos.php'; ?>
     <section class="moduloPrincipal">
-      <ion-icon name="menu" id="menuModulos"></ion-icon>
-      <h1 class="titulo InvMateriales">Inventario Materiales</h1>
-      <form action="" class="contenedorFiltrosMateriales" id="formularioFiltro">
-        <div class="camposfiltros">
-          <label for="filtroDescripcion">Descripción de Material</label>
-          <input type="text" name="filtroDescripcion" id="filtroDescripcion"/>
+      <header class="headerModulo">
+        <div class="headerModuloIzquierda">
+          <ion-icon name="menu" id="menuModulos"></ion-icon>
+          <h1 class="titulo InvMateriales">Inventario Materiales</h1>
         </div>
-        <button type="submit" class="btnFiltroCompras">Buscar Material</button>
-      </form>
-      <table class="tablaInventarioMateriales" border="1">
-        <thead class="encabezadosTablas">
-          <tr>
-            <th>Código</th>
-            <th>Descripción</th>
-            <th>Cantidad</th>
-          </tr>
-        </thead>
-        <tbody id="tablaMaterialesBody">
-          <!-- Aquí se llenarán los datos de la tabla mediante JavaScript -->
-        </tbody>
-      </table>
-      <div class="paginacion Materiales">
-        <button class="btnPaginacion" id="paginacionAnterior">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-          Anterior
-        </button>
-        <span id="contadorPaginas">Página 1 de 1</span>
-        <button class="btnPaginacion" id="paginacionSiguiente">
-          Siguiente
-          <ion-icon name="arrow-forward-outline"></ion-icon>
-        </button>
-      </div>
+        <?php include 'usuarioModulos.php'; ?>
+      </header>
+        <section class="panelInventarioConsulta">
+          <div class="encabezadoInventarioConsulta">
+            <div class="textoEncabezadoInventario">
+              <h2>Inventario de Materiales</h2>
+              <p>Consulta las cantidades disponibles de los materiales registrados.</p>
+            </div>
+            <div class="accionesInventarioConsulta">
+              <button type="button" id="mostrarFiltrosMateriales" class="btnMostrarFiltros" aria-controls="formularioFiltro" aria-expanded="false">
+                <ion-icon name="filter-outline"></ion-icon>
+                Filtrar búsqueda
+              </button>
+            </div>
+          </div>
+          <form action="" class="contenedorFiltrosMateriales filtrosInventario" id="formularioFiltro" hidden>
+            <div class="camposfiltros">
+              <label for="filtroDescripcion">Descripción de Material</label>
+              <input type="text" name="filtroDescripcion" id="filtroDescripcion"/>
+            </div>
+            <button type="submit" class="btnFiltroCompras">Buscar Material</button>
+          </form>
+          <div class="contenedorInventario Materiales">
+            <table class="tablaInventarioMateriales">
+              <thead class="encabezadosTablas">
+                <tr>
+                  <th>Código</th>
+                  <th>Descripción</th>
+                  <th>Cantidad</th>
+                </tr>
+              </thead>
+              <tbody id="tablaMaterialesBody">
+              </tbody>
+            </table>
+          </div>
+          <div class="paginacion Materiales">
+            <button class="btnPaginacion" id="paginacionAnterior">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+              Anterior
+            </button>
+            <span id="contadorPaginas">Página 1 de 1</span>
+            <button class="btnPaginacion" id="paginacionSiguiente">
+              Siguiente
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </button>
+          </div>
+        </section>
     </section>
       <script
       type="module"

@@ -1,117 +1,92 @@
-# 🏪 Sistema Administrativo Web — Zapatería
+# Sistema Administrativo para Zapatería
 
-Sistema administrativo web aplicado a una zapatería, orientado a la gestión de pedidos, producción, compras, inventarios y generación de reportes. El sistema centraliza información de los principales procesos operativos y facilita el seguimiento de las actividades relacionadas con la fabricación y comercialización de calzado.
+Sistema web diseñado para gestionar las operaciones principales de una zapatería, incluyendo pedidos, producción, compras de materiales, inventarios, reportes y análisis de ventas. La plataforma centraliza la información operativa y ayuda a mejorar la trazabilidad de los procesos de fabricación y comercialización.
 
-Actualmente, el proyecto se encuentra en evolución con el desarrollo de un **módulo de Inteligencia de Negocios**, orientado al análisis de ventas mediante indicadores y dashboards para facilitar la interpretación de la información y apoyar la toma de decisiones.
+## Descripción general
 
----
+El proyecto permite administrar de forma integral los procesos de negocio de la empresa, desde el registro de pedidos hasta la consulta de indicadores de rendimiento en ventas. Además, incorpora dashboards para analizar métricas clave y facilitar la toma de decisiones basada en datos.
 
-## 🚀 Características principales
+## Módulos principales
 
-El sistema integra diferentes módulos para gestionar los procesos administrativos y operativos de la zapatería:
+### Registro de Pedidos
+Gestiona la carga y seguimiento de pedidos, incluyendo datos del cliente, productos solicitados, tipo y canal de venta, información de envío y forma de pago.
 
-### 📦 Registro de Pedidos
+### Producción
+Permite registrar la producción de calzado, tanto para nuevos modelos como para productos existentes, con detalle de color, talla, cantidad y demás variables necesarias para el control operativo.
 
-Permite registrar y gestionar los pedidos realizados por los clientes, incluyendo información del pedido, productos solicitados, datos del cliente, tipo y canal de venta, información de envío y forma de pago.
+### Compra de Materiales
+Registra las compras de materiales para la fabricación, con información de proveedores, cantidades, costos, compradores y comprobantes, además de consultar el historial de compras.
 
-### 🏭 Ingreso de Producción
+### Inventario de Producción
+Controla las existencias de calzado producido, organizadas por código, modelo, línea, color y talla para facilitar la consulta y búsqueda de productos disponibles.
 
-Permite registrar la producción de calzado, incluyendo el ingreso de nuevos productos y el registro de cantidades fabricadas para productos existentes, especificando características como color, talla y cantidad.
+### Inventario de Materiales
+Monitorea el stock de materiales utilizados en producción, permitiendo consultar cantidades disponibles y localizar materiales registrados dentro del sistema.
 
-### 🛒 Compra de Materiales
+### Reportes
+Genera reportes de ventas y pedidos con filtros para analizar estados, formas de pago, cantidades y montos de venta de manera más eficiente.
 
-Permite registrar las compras de materiales utilizados en la fabricación de calzado, almacenando información relacionada con cantidades, costos, proveedores, compradores y comprobantes. También permite consultar el historial de compras mediante diferentes filtros.
+### Inteligencia de Negocios
+Incluye dashboards de análisis general y por producto, con filtros por periodo, canal de venta, tipo de venta y modelo, además de indicadores clave para la toma de decisiones.
 
-### 📦 Inventario de Producción
-
-Permite consultar y controlar las existencias de calzado producido, organizadas por código, modelo, línea, color y talla, facilitando la búsqueda y consulta de los productos disponibles.
-
-### 🧰 Inventario de Materiales
-
-Permite controlar las existencias de los materiales utilizados en la producción, proporcionando información sobre las cantidades disponibles y herramientas para localizar los materiales registrados.
-
-### 📊 Reportes
-
-Incluye reportes de pedidos y ventas que permiten consultar información mediante diferentes filtros y visualizar datos como estados de pedidos, formas de pago, cantidades y montos de venta.
-
-### 📈 Inteligencia de Negocios
-
-Módulo actualmente en desarrollo orientado al análisis de las ventas mediante indicadores y dashboards interactivos.
-
-Incluye:
-
-* **Análisis General:** visualización de indicadores y métricas generales sobre las ventas.
-* **Análisis de Productos:** análisis de las ventas según productos, categorías y otras características para facilitar la identificación de tendencias y productos con mayor demanda.
-
----
-
-## 🛠️ Tecnologías utilizadas
+## Tecnologías utilizadas
 
 ### Frontend
-
-* HTML5
-* CSS3
-* JavaScript
+- HTML5
+- CSS3
+- JavaScript
 
 ### Backend
-
-* PHP
+- PHP
 
 ### Base de datos
+- MySQL
 
-* MySQL
+### Librerías y recursos
+- SweetAlert2
+- Ionicons
+- ApexCharts
 
-### Librerías
+## Estructura del proyecto
 
-* [SweetAlert2](https://sweetalert2.github.io/) — Alertas y modales.
-* [Ionicons](https://ionic.io/ionicons) — Iconografía de la interfaz.
+- `index.html` — pantalla de inicio de sesión
+- `php/vistas/` — módulos principales del sistema
+- `php/configuraciones/` — lógica de negocio, inserciones, filtros y configuración
+- `js/` — scripts de la interfaz y funcionalidad del sistema
+- `css/` — estilos y diseño responsivo
+- `capturas/` — imágenes de referencia del sistema
 
-### Herramientas
+## Capturas del sistema
 
-* XAMPP
-* Git
-* GitHub
-
----
-
-## 🖥️ Capturas del sistema
-
-### 🔐 Inicio de sesión
+### Inicio de sesión
 
 ![Inicio de sesión](capturas/inicioSesión.png)
 
-### 🏠 Página principal
+### Página principal
 
 ![Página principal](capturas/paginaPrincipal.png)
 
-### 📦 Registro de pedidos
+### Registro de pedidos
 
 ![Registro de pedidos](capturas/registroPedidos.png)
 
-### 🏭 Ingreso de producción
+### Ingreso de producción
 
 ![Ingreso de producción](capturas/ingresoProduccion.png)
 
-### 📦 Inventario de producción
+### Inventario de producción
 
 ![Inventario de producción](capturas/inventario.png)
 
-### 🛒 Compra de materiales
+### Compra de materiales
 
 ![Compra de materiales](capturas/compras.png)
 
-### 📊 Reportes
+### Reportes
 
 ![Reportes](capturas/reportes.png)
 
-![Reportes](screenshots/reportes.png)
+## Nota
 
-### 📈 Dashboard de Inteligencia de Negocios
+Este repositorio se presenta con fines de portafolio. Por motivos de privacidad y seguridad, no se incluyen la base de datos real, credenciales ni información sensible del entorno productivo.
 
-![Dashboard de Inteligencia de Negocios](screenshots/dashboard-bi.png)
-
----
-
-## 📌 Nota
-
-Este repositorio presenta el proyecto con fines de portafolio. Por motivos de privacidad y seguridad, no se incluye la base de datos, información utilizada en el entorno real ni credenciales de acceso.

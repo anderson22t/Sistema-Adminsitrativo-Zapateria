@@ -2,22 +2,24 @@
 <div class="detallesPedido">
     <ion-icon name="close-circle-outline" id="iconoCerrarLista"></ion-icon>
     <h2 id="datoNoPedido"></h2>
-    <table id="datosGenerales" class="tablaDatosGenerales" border="1">
-        <thead>
-            <tr>
-                <th>Periodo</th>
-                <th>Fecha de Registro</th>
-                <th>Fecha de Entrega</th>
-                <th>Tipo de Venta</th>
-                <th>Canal de Venta</th>
-                <th>Vendedor</th>
-            </tr>
-        </thead>
-        <tbody id="datosGeneralesBody"></tbody>
-    </table>
+    <div class="contenedorTablaGeneral">
+        <table id="datosGenerales" class="tablaDatosGenerales">
+            <thead>
+                <tr>
+                    <th>Periodo</th>
+                    <th>Fecha de Registro</th>
+                    <th>Fecha de Entrega</th>
+                    <th>Tipo de Venta</th>
+                    <th>Canal de Venta</th>
+                    <th>Vendedor</th>
+                </tr>
+            </thead>
+            <tbody id="datosGeneralesBody"></tbody>
+        </table>
+    </div>
     <div class="contenidoPedido">
         <div class="contenedorDatosCliente">
-            <h3 class="tituloContenido">Datos del Cliente</h3>
+            <h3 class="tituloContenido"><ion-icon name="person-circle-outline"></ion-icon> Datos del Cliente</h3>
             <div class="datosCliente">
                 <h3>Cliente:</h3>
                 <p id="datoNombre"></p>
@@ -27,7 +29,7 @@
                 <p id="datoCorreo"></p>
             </div>
             <div class="datosCliente">
-                <h3>Telefono:</h3>
+                <h3>Teléfono:</h3>
                 <p id="datoTelefono"></p>
             </div>
             <div class="datosCliente">
@@ -36,7 +38,7 @@
             </div>
             <div class="datosCliente">
                 <h3>NIT:</h3>
-                <p id="datoNit">/p>
+                <p id="datoNit"></p>
             </div>
             <div class="datosCliente">
                 <h3>Dirección:</h3>
@@ -48,7 +50,7 @@
             </div>
         </div>
         <div class="contenedorDatosEnvio">
-            <h3 class="tituloContenido">Datos de Envío</h3>
+            <h3 class="tituloContenido"><ion-icon name="airplane-outline"></ion-icon> Datos de Envío</h3>
             <div class="datosEnvio">
                 <h3>Mensajería:</h3>
                 <p id="datoMensajeria"></p>
@@ -67,26 +69,28 @@
             </div>
         </div>
     </div>
-    <table class="tablaDetallesPedido" id="productosPedido" border="1">
-        <thead>
-            <tr>
-                <th>Código Producto</th>
-                <th>Descripción</th>
-                <th>Color</th>
-                <th>Talla</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody id="datosProducto"></tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6" id="filaTotal">Total más envío</td>
-                <td id="totalPedido"></td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="contenedorTablaProductos">
+        <table class="tablaDetallesPedido" id="productosPedido">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Color</th>
+                    <th>Talla</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="datosProducto"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" id="filaTotal">Total más envío</td>
+                    <td id="totalPedido"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
 <div class="actualizarPedido">
     <ion-icon name="close-circle-outline" id="iconoCerrarActualizar"></ion-icon>
@@ -208,14 +212,4 @@
         </table>
     </div>
     <button type="button" class="btnActualizarDatos" id="actualizarDatos">Actualizar Datos </button>
-</div>
-<div class="contenedorEliminar">
-    <p>¿Estas seguro de eliminar el Pedido No. 
-        <span id="codigoPedido"></span>
-        ?
-    </p>
-    <div class="botonesEliminacion">
-        <button class="btnEliminacion" id="confirmarEliminacion">Confirmo</button>
-        <button class="btnEliminacion" id="cancelarEliminacion">Cancelar</button>
-    </div>
-</div>
+</div>

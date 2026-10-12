@@ -17,28 +17,37 @@ let datosProductos = null;
 var totalPedido = 0;
 
 document.addEventListener("click", function(e) {
-    if (e.target.classList.contains("btnVerDetalles")) {
+    const btnDetalles = e.target.closest(".btnVerDetalles");
+    const btnEditar = e.target.closest(".iconoEditar");
+    const btnEliminar = e.target.closest(".iconoEliminar");
+    if (btnDetalles) {
         contenedorDetalles.style.display = "block";
         detallesPedido.style.display = "block";
-        mostrarDetallesPedido(e.target.closest('tr'));
-    }
-});
-
-document.addEventListener("click", function(e) {
-    if (e.target.classList.contains("iconoEditar")) {
+        mostrarDetallesPedido(btnDetalles.closest('tr'));
+    } else if (btnEditar) {
         contenedorDetalles.style.display = "block";
         actualizarPedido.style.display = "block";
-        mostrarDatosActualizar(e.target.closest('tr'));
+        mostrarDatosActualizar(btnEditar.closest('tr'));
+    } else if (btnEliminar) {
+        const noPedido = btnEliminar.closest('tr').cells[0].innerText;
+
+        Swal.fire({
+            title: '¿Eliminar pedido?',
+            text: `¿Estás seguro de que deseas eliminar el Pedido No. ${noPedido}? Esta acción no se puede deshacer.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e74c3c',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                eliminarDatos(noPedido);
+            }
+        });
     }
 });
 
-document.addEventListener("click", function(e) {
-    if (e.target.classList.contains("iconoEliminar")) {
-        contenedorDetalles.style.display = "block";
-        contenedorEliminar.style.display = "flex";
-        textoNoPedido.textContent = e.target.closest('tr').cells[0].innerText;
-    }
-});
 
 iconoCerrarLista.addEventListener("click", function() {
     contenedorDetalles.style.display = "none";
@@ -51,14 +60,7 @@ iconoCerrarActualizar.addEventListener("click", function() {
     location.reload();
 });
 
-confirmarEliminacion.addEventListener("click", function() {
-    eliminarDatos(textoNoPedido.textContent.trim());
-});
-
-cancelarEliminacion.addEventListener("click", function() {
-    contenedorDetalles.style.display = "none";
-    contenedorEliminar.style.display = "none";
-});
+// confirmarEliminacion y cancelarEliminacion ya no se usan (reemplazados por SweetAlert2)
 
 function formatearFecha(fecha) {
     if (!fecha) return '';
@@ -69,7 +71,7 @@ function formatearFecha(fecha) {
 function mostrarDetallesPedido(fila) {
    const codigoPedido = fila.cells[0].innerText;
 
-   fetch(`../../php/configuraciones/detallesPedidos.php?codigoPedido=${codigoPedido}`)
+   fetch(`../../php/configuraciones/consultarDatos/detallesPedidos.php?codigoPedido=${codigoPedido}`)
     .then(response => response.json())
     .then(data => {
         if (data.error) {
@@ -130,7 +132,7 @@ function mostrarDetallesPedido(fila) {
 
 function mostrarDatosActualizar(fila) {
     const codigoPedido = fila.cells[0].innerText;
-   fetch(`../../php/configuraciones/detallesPedidos.php?codigoPedido=${codigoPedido}`)
+   fetch(`../../php/configuraciones/consultarDatos/detallesPedidos.php?codigoPedido=${codigoPedido}`)
    .then(response => response.json())
     .then(data => {
         if (data.error) {
@@ -226,7 +228,7 @@ function actualizarDatos() {
 
     if (document.getElementById('datoPeriodo').value != datosPedidos.periodo) {
         datosNuevos.No_Periodo = document.getElementById('datoPeriodo').value;
-        console.log(datosNuevos.No_Periodo);
+
     }
     if (document.getElementById('datoFechaPedido').value !== datosPedidos.fechaPedido) {
         datosNuevos.fechaPedido = document.getElementById('datoFechaPedido').value;
@@ -339,12 +341,9 @@ function actualizarDatos() {
         datosNuevos.Total = document.getElementById('totalPedidoRegistrado').textContent;
     }
 
-    // Ahora puedes enviar datosNuevos y productosEditados al backend si hay cambios
     if (Object.keys(datosNuevos).length > 0 || datosNuevosProductos.length > 0) {
-        // Aquí tu fetch o AJAX para enviar los cambios
-        console.log('Datos modificados:', datosNuevos);
-        console.log('Productos modificados:', datosNuevosProductos);
-        fetch('../../php/configuraciones/actualizarDatos.php', {
+
+        fetch('../../php/configuraciones/actualizarDatos/actualizarDatos.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -370,18 +369,27 @@ function actualizarDatos() {
 }
 
 function eliminarDatos(codigoPedido) {
-    fetch(`../../php/configuraciones/eliminarDatos.php?codigoPedido=${codigoPedido}`)
+    fetch(`../../php/configuraciones/eliminarDatos/eliminarDatos.php?codigoPedido=${codigoPedido}`)
     .then(response => response.json())
     .then(data => {
         if (data.estado) {
-            contenedorDetalles.style.display = "none";
-            contenedorEliminar.style.display = "none";
-            mostrarToast(data.mensaje, "success");
-            setTimeout(() => {
+            Swal.fire({
+                title: '¡Eliminado!',
+                text: data.mensaje,
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
                 location.reload();
-            }, 3000); // Espera 3.5 segundos antes de recargar
+            });
         } else {
-            mostrarToast(data.mensaje, "error");
+            Swal.fire({
+                title: 'Error',
+                text: data.mensaje,
+                icon: 'error',
+                confirmButtonColor: '#e74c3c',
+                confirmButtonText: 'Aceptar'
+            });
         }
     });
 }

@@ -60,13 +60,13 @@
         <div class="submenu-items">
             <div class="seccion subseccion">
                 <img src="../../componentes/iconos/Ventas.svg" alt="" class="dashboard">
-                <a href="" class="nombreSeccion">
+                <a href="../vistas/dashboardGeneral.php" class="nombreSeccion">
                     <h2>Análisis General</h2>
                 </a>
             </div>
             <div class="seccion subseccion">
                 <img src="../../componentes/iconos/Calzado.svg" alt="" class="dashboard">
-                <a href="" class="nombreSeccion">
+                <a href="../vistas/dashboardEspecifico.php" class="nombreSeccion">
                     <h2>Análisis de Productos</h2>
                 </a>
             </div>
@@ -75,17 +75,3 @@
 </div>
 
 <div class="menuLateral" id="menuLateral"></div>
-<div class="contenedorUsuario Modulos">
-    <ion-icon name="person-circle-outline" id="iconoUsuario"></ion-icon>
-    <p><?php echo $_SESSION['usuario']; ?> </p>
-</div>
-<div class="configuracionUsuario Modulos">
-    <div class="opcionesUsuario">
-        <ion-icon name="settings-outline"></ion-icon>
-        <p>Configuración</p>
-    </div>
-    <div class="opcionesUsuario" id="cerrarSesion" onclick="cerrarSesion()">
-        <ion-icon name="log-out-outline"></ion-icon>
-        <p>Cerrar Sesión</p>
-    </div>
-</div>

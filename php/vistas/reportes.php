@@ -3,7 +3,7 @@ session_start(); // Iniciar la sesión
 //Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
   // Si no ha iniciado sesión, redirigir a la página de inicio de sesión
-  header("Location: ../../html/index.html");
+  header("Location: ../../index.html");
   exit();
 }
 ?>
@@ -12,7 +12,8 @@ if (!isset($_SESSION['usuario_id'])) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zapatería</title>
+    <title>Reportes</title>
+    <link rel="icon" type="image/png" href="../../componentes/iconos/favicon-32x32.png" />
     <link rel="stylesheet" href="../../css/estilos.css" />
     <link rel="stylesheet" href="../../css/responsive.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,8 +30,13 @@ if (!isset($_SESSION['usuario_id'])) {
   <body>
     <?php include 'sidebarModulos.php' ?>
     <section class="moduloPrincipal">
-      <ion-icon name="menu" id="menuModulos"></ion-icon>
-      <h1 class="titulo Reportes">Reportes</h1>
+      <header class="headerModulo">
+        <div class="headerModuloIzquierda">
+          <ion-icon name="menu" id="menuModulos"></ion-icon>
+          <h1 class="titulo Reportes">Reportes</h1>
+        </div>
+        <?php include 'usuarioModulos.php'; ?>
+      </header>
       <div class="contenedorBtnReportes">
         <button class="btnReportes activo" id="btnReportePedidos">
           Reporte de Pedidos
@@ -39,12 +45,21 @@ if (!isset($_SESSION['usuario_id'])) {
           Reporte de Ventas
         </button>
       </div>
-      <div class="reportesPedidos">
-        <button type="button" id="mostrarFiltrosPedidos" class="btnMostrarFiltros">
-          <ion-icon name="filter-outline"></ion-icon>
-          Filtrar búsqueda
-        </button>
-        <form action="" class="filtrosReportesPedidos" id="formularioFiltroPedidos">
+      <section class="panelReporteConsulta">
+        <div class="reportesPedidos">
+          <div class="encabezadoReporteConsulta">
+            <div class="textoEncabezadoReporte">
+              <h2>Reporte de Pedidos</h2>
+              <p>Consulta el estado, las fechas y los datos de entrega de los pedidos registrados.</p>
+            </div>
+            <div class="accionesReporteConsulta">
+              <button type="button" id="mostrarFiltrosPedidos" class="btnMostrarFiltros" aria-controls="formularioFiltroPedidos" aria-expanded="false">
+                <ion-icon name="filter-outline"></ion-icon>
+                Filtrar búsqueda
+              </button>
+            </div>
+          </div>
+          <form action="" class="filtrosReportesPedidos" id="formularioFiltroPedidos" hidden>
           <div class="camposfiltros">
             <label for="filtroNoPedido">No. Pedido</label>
             <input type="number" name="filtroNoPedido" id="filtroNoPedido" />
@@ -66,31 +81,40 @@ if (!isset($_SESSION['usuario_id'])) {
             <input type="date" name="filtroFechaEntrega" id="filtroFechaEntrega"/>
           </div>
           <button type="submit" class="btnFiltroCompras" id="btnFiltroPedidos">Aplicar Filtro</button>
-        </form>
-        <table class="tablaReportesPedidos" border="1">
-          <thead class="encabezadosTablas">
-            <tr>
-              <th>No. Pedido</th>
-              <th>Fecha de Pedido</th>
-              <th>Cliente</th>
-              <th>Dirección</th>
-              <th>Fecha de Entrega</th>
-              <th>Detalles</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="bodyTablaPedidos">
-          </tbody>
-        </table>
-      </div>
-      <?php include 'componenteDetallesPedido.php'; ?>
-      <div class="reportesVentas">
-        <button type="button" id="mostrarFiltrosVentas" class="btnMostrarFiltros">
-          <ion-icon name="filter-outline"></ion-icon>
-          Filtrar búsqueda
-        </button>
-        <form  action="" class="filtrosReportesVentas" id="formularioFiltroVentas">
+          </form>
+          <div class="contenedorReportes">
+            <table class="tablaReportesPedidos">
+              <thead class="encabezadosTablas">
+                <tr>
+                  <th>No. Pedido</th>
+                  <th>Fecha de Pedido</th>
+                  <th>Cliente</th>
+                  <th>Dirección</th>
+                  <th>Fecha de Entrega</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="bodyTablaPedidos">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <?php include 'componenteDetallesPedido.php'; ?>
+        <div class="reportesVentas">
+          <div class="encabezadoReporteConsulta">
+            <div class="textoEncabezadoReporte">
+              <h2>Reporte de Ventas</h2>
+              <p>Revisa el resumen de ventas por fecha y tipo de pago.</p>
+            </div>
+            <div class="accionesReporteConsulta">
+              <button type="button" id="mostrarFiltrosVentas" class="btnMostrarFiltros" aria-controls="formularioFiltroVentas" aria-expanded="false">
+                <ion-icon name="filter-outline"></ion-icon>
+                Filtrar búsqueda
+              </button>
+            </div>
+          </div>
+          <form action="" class="filtrosReportesVentas" id="formularioFiltroVentas" hidden>
           <div class="camposfiltros">
             <label for="filtroFechaVenta">Fecha</label>
             <input type="date" name="filtroFechaVenta" />
@@ -100,45 +124,48 @@ if (!isset($_SESSION['usuario_id'])) {
             <input type="text" name="filtroTipoVenta" />
           </div>
           <button type="submit" class="btnFiltroCompras">Aplicar Filtro</button>
-        </form>
-        <table class="tablaReportesVentas" border="1">
-            <thead class="encabezadosTablas">
-              <tr>
-                <th rowspan="2">Fecha</th> 
-                <th colspan="2">Efectivo</th> 
-                <th colspan="2">Tarjeta</th> 
-                <th colspan="2">Transferencia</th> 
-                <th colspan="2">Cargo Expreso</th> 
-                <th rowspan="2">Total Pedidos</th> 
-                <th rowspan="2">Monto Total</th> 
-              </tr>
-              <tr>
-                <th>Cantidad</th> 
-                <th>Monto</th>    
-                <th>Cantidad</th> 
-                <th>Monto</th>    
-                <th>Cantidad</th> 
-                <th>Monto</th>    
-                <th>Cantidad</th> 
-                <th>Monto</th>   
-              </tr>
-            </thead>
-            <tbody id="bodyTablaVentas">
-              <!-- Aquí se llenarán los datos de la tabla mediante JavaScript -->
-            </tbody>
-        </table> 
-      </div>
-      <div class="paginacion Reportes">
-        <button class="btnPaginacion" id="paginacionAnterior">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-          Anterior
-        </button>
-        <span id="contadorPaginas">Página 1 de 1</span>
-        <button class="btnPaginacion" id="paginacionSiguiente">
-          Siguiente
-          <ion-icon name="arrow-forward-outline"></ion-icon>
-        </button>
-      </div>
+          </form>
+          <div class="contenedorReportes">
+            <table class="tablaReportesVentas" border="1">
+              <thead class="encabezadosTablas">
+                <tr>
+                  <th rowspan="2">Fecha</th>
+                  <th colspan="2">Efectivo</th>
+                  <th colspan="2">Tarjeta</th>
+                  <th colspan="2">Transferencia</th>
+                  <th colspan="2">Cargo Expreso</th>
+                  <th rowspan="2">Total Pedidos</th>
+                  <th rowspan="2">Monto Total</th>
+                </tr>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Monto</th>
+                  <th>Cantidad</th>
+                  <th>Monto</th>
+                  <th>Cantidad</th>
+                  <th>Monto</th>
+                  <th>Cantidad</th>
+                  <th>Monto</th>
+                </tr>
+              </thead>
+              <tbody id="bodyTablaVentas">
+                <!-- Aquí se llenarán los datos de la tabla mediante JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="paginacion Reportes">
+          <button class="btnPaginacion" id="paginacionAnterior">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+            Anterior
+          </button>
+          <span id="contadorPaginas">Página 1 de 1</span>
+          <button class="btnPaginacion" id="paginacionSiguiente">
+            Siguiente
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
+        </div>
+      </section>
       <div id="toast">Los datos han sido actualizados</div>      
     </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

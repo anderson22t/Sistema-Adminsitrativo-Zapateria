@@ -3,7 +3,7 @@ session_start(); // Iniciar la sesión
 //Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
   // Si no ha iniciado sesión, redirigir a la página de inicio de sesión
-  header("Location: ../../html/index.html");
+  header("Location: ../../index.html");
   exit();
 }
 ?>
@@ -13,7 +13,8 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zapatería</title>
+  <title>Pedidos</title>
+  <link rel="icon" type="image/png" href="../../componentes/iconos/favicon-32x32.png" />
   <link rel="stylesheet" href="../../css/estilos.css" />
   <link rel="stylesheet" href="../../css/responsive.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,12 +28,17 @@ if (!isset($_SESSION['usuario_id'])) {
 <body>
   <?php include '../vistas/sidebarModulos.php'; ?>
   <section class="moduloPrincipal">
-    <ion-icon name="menu" id="menuModulos"></ion-icon>
-    <h1 class="titulo RegistroPedido">Registro de Pedidos</h1>
-    <form action="../configuraciones/ingresoPedidos.php" method="POST" id="formularioRegistroPedido">
+    <header class="headerModulo">
+      <div class="headerModuloIzquierda">
+        <ion-icon name="menu" id="menuModulos"></ion-icon>
+        <h1 class="titulo RegistroPedido">Registro de Pedidos</h1>
+      </div>
+      <?php include 'usuarioModulos.php'; ?>
+    </header>
+    <form action="" method="" id="formularioRegistroPedido">
       <div class="formularioDatosPedido">
-        <h3>Datos del Pedido No.</h3>
-        <div class="camposFormulario">
+        <h3>Datos del Pedido</h3>
+        <div class="camposFormulario Pedido">
           <div class="camposRP">
             <label for="noPeriodo">No. Período</label>
             <input type="text" name="noPeriodo" id="noPeriodo" required />
@@ -72,16 +78,11 @@ if (!isset($_SESSION['usuario_id'])) {
         <h3>Producto</h3>
         <div class="camposFormulario producto">
           <div class="camposRP">
-            <label for="codigoProducto">Código Producto</label>
+            <label for="codigoProducto">Seleccione el modelo del calzado</label>
             <select name="codigoProducto" id="codigoProducto" required>
-              <option value="">Códigos</option>
-              <?php include '../configuraciones/codigosProductos.php'; ?>
-              <!-- Aquí se llenarán los códigos de productos desde la base de datos -->
+              <option value="">Códigos de calzado</option> 
+              <?php include '../configuraciones/consultarDatos/codigosProductos.php'; ?>
             </select>
-          </div>
-          <div class="camposRP">
-            <label for="descripcionProducto">Descripción</label>
-            <p class="descripcionProducto" id="descripcionProducto">Seleccione el código de calzado</p>
           </div>
           <div class="camposRP">
             <label for="color">Color</label>
@@ -191,81 +192,87 @@ if (!isset($_SESSION['usuario_id'])) {
       </div>
       <div class="tablaResumen">
         <h3>Resumen del Pedido</h3>
-        <table id="resumenDatosPedidos" border="1">
-          <thead>
-            <tr>
-              <th>Período</th>
-              <th>Tipo de Venta</th>
-              <th>Canal de Venta</th>
-              <th>Vendedor</th>
-              <th>Fecha de Pedido</th>
-              <th>Fecha de Entrega</th>
-            </tr>
-          </thead>
-          <tbody id="datosPedido">
-          </tbody>
-        </table>
-        <table id="resumenDatosCliente" border="1">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <td>${datos.nombre}</td>
-              <th>Correo</th>
-              <td>${datos.correo}</td>
-            </tr>
-            <tr>
-              <th>Teléfono</th>
-              <td>${datos.telefono}</td>
-              <th>Perfil de Usuario</th>
-              <td>${datos.perfil}</td>
-            </tr>
-            <tr>
-              <th>Dirección</th>
-              <td>${datos.direccion}</td>
-              <th>Indicaciones</th>
-              <td>${datos.indicaciones}</td>
-            </tr>
-            <tr>
-              <th>NIT</th>
-              <td>${datos.nit}</td>
-              <th>Mensajería</th>
-              <td>${datos.mensajeria}</td>
-            </tr>
-            <tr>
-              <th>Costo de Envío</th>
-              <td>${datos.costoEnvio}</td>
-              <th>Forma de Pago</th>
-              <td>${datos.formaPago}</td>
-            </tr>
-          </thead>
-        </table>
-        <table id="resumenDatosProducto" border="1">
-          <thead>
-            <tr>
-              <th>Código Producto</th>
-              <th>Descripción</th>
-              <th>Color</th>
-              <th>Talla</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody id="datosProducto"></tbody>
-          <tfoot>
-            <tr>
-              <td colspan="6" id="filaTotal">Total con envío</td>
-              <td id="totalPedido"></td>
-            </tr>
-          </tfoot>
-        </table>
+        <div class="tablaResumenScroll">
+          <table id="resumenDatosPedidos" border="1">
+            <thead>
+              <tr>
+                <th>Período</th>
+                <th>Tipo de Venta</th>
+                <th>Canal de Venta</th>
+                <th>Vendedor</th>
+                <th>Fecha de Pedido</th>
+                <th>Fecha de Entrega</th>
+              </tr>
+            </thead>
+            <tbody id="datosPedido">
+            </tbody>
+          </table>
+        </div>
+        <div class="tablaResumenScroll">
+          <table id="resumenDatosCliente" border="1">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <td>${datos.nombre}</td>
+                <th>Correo</th>
+                <td>${datos.correo}</td>
+              </tr>
+              <tr>
+                <th>Teléfono</th>
+                <td>${datos.telefono}</td>
+                <th>Perfil de Usuario</th>
+                <td>${datos.perfil}</td>
+              </tr>
+              <tr>
+                <th>Dirección</th>
+                <td>${datos.direccion}</td>
+                <th>Indicaciones</th>
+                <td>${datos.indicaciones}</td>
+              </tr>
+              <tr>
+                <th>NIT</th>
+                <td>${datos.nit}</td>
+                <th>Mensajería</th>
+                <td>${datos.mensajeria}</td>
+              </tr>
+              <tr>
+                <th>Costo de Envío</th>
+                <td>${datos.costoEnvio}</td>
+                <th>Forma de Pago</th>
+                <td>${datos.formaPago}</td>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tablaResumenScroll">
+          <table id="resumenDatosProducto" border="1">
+            <thead>
+              <tr>
+                <th>Código Producto</th>
+                <th>Descripción</th>
+                <th>Color</th>
+                <th>Talla</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="datosProducto"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6" id="filaTotal">Total con envío</td>
+                <td id="totalPedido"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
       <div class="botones dos">
         <button type="button" class="btnFormulario" id="btnAnteriorDos">
           <ion-icon name="arrow-back-outline"></ion-icon>
           Anterior
         </button>
-        <button type="submit" class="btnFormulario" id="btnEnviarPedido">
+        <button type="button" class="btnFormulario" id="btnEnviarPedido">
           Confirmar Pedido
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -274,7 +281,7 @@ if (!isset($_SESSION['usuario_id'])) {
   </section>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../../js/alertas.js"></script>
-  <script src="../../js/script.js"></script>
+  <script src="../../js/scriptPedidos.js"></script>
   <script src="../../js/cerrarSesionModulos.js"></script>
   <script
     type="module"

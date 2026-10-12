@@ -5,6 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const contadorPaginas = document.getElementById("contadorPaginas");
   const btnAnterior = document.getElementById("paginacionAnterior");
   const btnSiguiente = document.getElementById("paginacionSiguiente");
+  const btnMostrarFiltros = document.getElementById("mostrarFiltrosMateriales");
+  const contenedorFiltros = document.querySelector(".contenedorFiltrosMateriales");
+
+  // Toggle de filtros del inventario.
+  btnMostrarFiltros.addEventListener("click", () => {
+    contenedorFiltros.hidden = !contenedorFiltros.hidden;
+    btnMostrarFiltros.setAttribute("aria-expanded", String(!contenedorFiltros.hidden));
+  });
 
   let paginaActual = 1;
   let totalPaginas = 1;
@@ -13,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cargarMateriales = async (descripcion = "", pagina = 1) => {
     try {
       const response = await fetch(
-        `../../php/configuraciones/seleccionMateriales.php?descripcion=${encodeURIComponent(descripcion)}&pagina=${pagina}`
+        `../../php/configuraciones/consultarDatos/seleccionMateriales.php?descripcion=${encodeURIComponent(descripcion)}&pagina=${pagina}`
       );
       if (!response.ok) throw new Error("No se pudo obtener los materiales");
 
