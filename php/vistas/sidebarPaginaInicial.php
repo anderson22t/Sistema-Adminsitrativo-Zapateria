@@ -60,13 +60,13 @@
         <div class="submenu-items">
             <div class="seccion subseccion">
                 <img src="../../componentes/iconos/Ventas.svg" alt="" class="dashboard">
-                <a href="" class="nombreSeccion">
+                <a href="dashboardGeneral.php" class="nombreSeccion">
                     <h2>Análisis General</h2>
                 </a>
             </div>
             <div class="seccion subseccion">
                 <img src="../../componentes/iconos/Calzado.svg" alt="" class="dashboard">
-                <a href="" class="nombreSeccion">
+                <a href="dashboardEspecifico.php" class="nombreSeccion">
                     <h2>Análisis de Productos</h2>
                 </a>
             </div>

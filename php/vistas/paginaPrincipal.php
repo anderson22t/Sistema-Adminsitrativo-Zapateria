@@ -3,7 +3,7 @@ session_start(); // Iniciar la sesión
 //Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
   // Si no ha iniciado sesión, redirigir a la página de inicio de sesión
-  header("Location: ../../html/index.html");
+  header("Location: ../../index.html");
   exit();
 }
 
@@ -14,7 +14,8 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zapatería</title>
+  <title>Inicio</title>
+  <link rel="icon" type="image/png" href="../../componentes/iconos/favicon-32x32.png" />
   <link rel="stylesheet" href="../../css/estilos.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,10 +38,10 @@ if (!isset($_SESSION['usuario_id'])) {
   <div class="menuLateral" id="menuLateral"></div>
   <ion-icon name="close-outline" id="iconoCerrar"></ion-icon>
   <div class="configuracionUsuario">
-    <div class="opcionesUsuario">
+    <a class="opcionesUsuario" href="../configuraciones/usuarios/usuario.php">
       <ion-icon name="settings-outline"></ion-icon>
       <p>Configuración</p>
-    </div>
+    </a>
     <div class="opcionesUsuario" id="cerrarSesion">
       <ion-icon name="log-out-outline"></ion-icon>
       <p>Cerrar Sesión</p>
@@ -90,13 +91,13 @@ if (!isset($_SESSION['usuario_id'])) {
         </a>
       </div>
       <div class="cardModulo">
-        <a href="">
+        <a href="dashboardGeneral.php">
           <img src="../../componentes/imagenes/VentasGenerales.svg" />
           <h2>Análisis General</h2>
         </a>
       </div>
       <div class="cardModulo">
-        <a href="">
+        <a href="dashboardEspecifico.php">
           <img src="../../componentes/imagenes/DetalleVentas.svg" />
           <h2>Análisis de Productos</h2>
         </a>

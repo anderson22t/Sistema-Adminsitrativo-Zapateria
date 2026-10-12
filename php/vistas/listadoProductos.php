@@ -2,15 +2,16 @@
 <div class="contenedorListaProductos">
     <ion-icon name="close-circle-outline" id="btnCerrarLista"></ion-icon>
     <div class="contenedorTablaProductos">
-        <table id="listadoProductos" border="1">
+        <table id="listadoProductos">
             <thead>
                 <tr>
-                    <th style="width: 17%">Código Producto</th>
-                    <th style="width: 25%">Descripción</th>
-                    <th style="width: 18%">Color</th>
-                    <th>Talla</th>
-                    <th style="width: 13%">Cantidad</th>
-                    <th>Precio</th>
+                    <th scope="col" style="width: 14%">Código</th>
+                    <th scope="col" style="width: 24%">Descripción</th>
+                    <th scope="col" style="width: 16%">Color</th>
+                    <th scope="col" style="width: 10%">Talla</th>
+                    <th scope="col" style="width: 12%">Cantidad</th>
+                    <th scope="col" style="width: 12%">Precio</th>
+                    <th scope="col" style="width: 12%">Acciones</th>
                 </tr>
             </thead>
             <tbody id="datosLista"></tbody>

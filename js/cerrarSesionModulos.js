@@ -4,38 +4,64 @@ const menuLateral = document.querySelector(".menuLateral");
 const menuModulos = document.getElementById("menuModulos");
 const sidebarModulos = document.querySelector(".sidebar");
 
+if (contenedorUsuario && configuracionUsuario) {
+    contenedorUsuario.addEventListener("click", function (e) {
+        e.stopPropagation();
+        configuracionUsuario.style.display = "block";
+        if (window.innerWidth <= 1023 && menuLateral) {
+            menuLateral.style.display = 'block';
+        }
+    });
 
-
-contenedorUsuario.addEventListener("click", function (){
-    configuracionUsuario.style.display = "block";
-});
-
-document.addEventListener("click", (e) => {
-    if (!contenedorUsuario.contains(e.target)){
-        configuracionUsuario.style.display = "none";
-    }
-});
+    document.addEventListener("click", (e) => {
+        if (!contenedorUsuario.contains(e.target)) {
+            configuracionUsuario.style.display = "none";
+        }
+    });
+}
 
 function cerrarSesion() {
-    window.location.href = '../configuraciones/cerrarSesion.php';
+    window.location.href = '../configuraciones/usuarios/cerrarSesion.php';
 }
 
-if (window.matchMedia("(max-width:1023px)").matches){
-    contenedorUsuario.addEventListener("click", function (){
-    configuracionUsuario.style.display = "block";
-    menuLateral.style.display = 'block';
-    });
+const botonCerrarSesion = document.getElementById("cerrarSesion");
+if (botonCerrarSesion) {
+    botonCerrarSesion.addEventListener("click", cerrarSesion);
+}
 
-    menuModulos.addEventListener("click", function (){
+if (menuModulos && sidebarModulos) {
+    menuModulos.addEventListener("click", function () {
         sidebarModulos.style.display = "block";
         sidebarModulos.style.zIndex = "1000";
-        menuLateral.style.display = 'block';
+        if (menuLateral) {
+            menuLateral.style.display = 'block';
+        }
     });
 }
 
-menuLateral.addEventListener("click", function (){
-    menuLateral.style.display = "none";
-    sidebarModulos.style.display = "none";
+if (menuLateral) {
+    menuLateral.addEventListener("click", function () {
+        menuLateral.style.display = "none";
+        if (sidebarModulos) {
+            sidebarModulos.style.display = "none";
+        }
+        if (configuracionUsuario) {
+            configuracionUsuario.style.display = "none";
+        }
+    });
+}
+
+// Limpiar estilos inline al redimensionar a pantalla de escritorio
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 1023) {
+        if (sidebarModulos) {
+            sidebarModulos.style.display = "";
+            sidebarModulos.style.zIndex = "";
+        }
+        if (menuLateral) {
+            menuLateral.style.display = "";
+        }
+    }
 });
 
 // Manejo de submenús colapsables y resaltado del ítem activo en páginas de módulos

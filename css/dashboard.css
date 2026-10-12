@@ -1,16 +1,14 @@
-.titulo.Dashboard{
-    margin-left: 2%;
-    margin-top: 2%;
-    margin-bottom: 3%;
+.titulo.Dashboard {
+    margin: 0;
     font-size: 32px;
-
+    white-space: nowrap;
 }
 
 .filtrosDashboard{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 2% 3% 2%;
+    margin: 0 2% 20px 2%;
     background-color: #ffffff;
     border-radius: 12px;
     padding: 10px 20px;
@@ -27,9 +25,10 @@
 
 /* Botones dentro del rango */
 .btnFiltrosGenerales {
+  font-family: 'Poppins', sans-serif;
   border: none;
   background: transparent;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
@@ -50,10 +49,97 @@
 }
 
 
+.filtrosBarraPrincipal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botón flecha desplegable para opciones secundarias */
+.btnToggleAcciones {
+  display: none; /* Oculto en pantallas de escritorio grandes */
+  align-items: center;
+  gap: 6px;
+  background-color: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnToggleAcciones:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  border-color: #cbd5e1;
+}
+
+.btnToggleAcciones ion-icon {
+  font-size: 16px;
+  transition: transform 0.25s ease;
+}
+
+.btnToggleAcciones.activo {
+  background-color: #eff6ff;
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.btnToggleAcciones.activo ion-icon {
+  transform: rotate(180deg);
+}
+
+.btnToggleAcciones.conFiltrosActivos {
+  position: relative;
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.btnToggleAcciones.conFiltrosActivos::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background-color: #0d6efd;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
 .filtrosAcciones{
     display: flex;
     gap: 10px;
+}
 
+#filtroCalzado{
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 8px 16px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #495057;
+  transition: all 0.2s ease;
+  &:hover{
+    background-color: #f8f9fa;
+    border-color: #0d6efd;
+  }
+  &:focus{
+    border-color: #0d6efd;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
+  }
+
+  & option {
+    font-family: 'Poppins', sans-serif;
+  }
 }
 
 /* Botones secundarios (Filtros Avanzados y Exportar) */
@@ -74,6 +160,251 @@
     color: #ffffff;
     box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
   }
+  &.activo{
+    background-color: #0d6efd;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+  }
+} 
+
+/* ----------------------------- Banner con Detalles de Consulta de datos ---------------------------*/
+.bannerDashboard {
+  width: 96%;
+  margin: 0 auto 24px auto;
+  box-sizing: border-box;
+  display: none; /* Oculto hasta que los datos carguen para evitar parpadeos */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+
+.bannerDashboard.visible {
+  display: flex;
+  animation: fadeInBanner 0.3s ease-out;
+}
+
+@keyframes fadeInBanner {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Encabezado o etiqueta inicial del banner (Oculto en desktop, activo en móvil/tablet) */
+.encabezadoBanner {
+  display: none;
+}
+
+.encabezadoBanner .bannerTitulo {
+  font-weight: 600;
+  color: #334155;
+  font-size: 13px;
+  letter-spacing: -0.1px;
+}
+
+.encabezadoBanner #iconoFiltroBanner {
+  display: none;
+  font-size: 16px;
+  color: #64748b;
+  transition: transform 0.25s ease;
+}
+
+/* Opciones ocultas preventivamente hasta ser activadas por JS */
+#opcionCanalVentaBanner,
+#opcionTipoVentaBanner,
+#opcionCalzadoBanner {
+  display: none;
+}
+
+/* Cada ítem de información dentro del banner */
+.opcionBanner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  position: relative;
+}
+
+/* Separador vertical sutil entre ítems */
+.opcionBanner + .opcionBanner::before,
+.encabezadoBanner + .opcionBanner::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 15px;
+  background-color: #e2e8f0;
+  margin-right: 8px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.opcionBanner .iconoOpcion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.opcionBanner .leyendaOpcion {
+  color: #64748b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.opcionBanner .bannerTexto {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Pastilla destacada para el modelo seleccionado en Dashboard Específico */
+#opcionCalzadoBanner .bannerTexto {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: #1d4ed8;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 2px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+}
+
+/* Pastilla badge para el rango de fechas */
+.bannerDashboard .bannerBadgeFechas {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 2.5px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ----------------- Variante Informativa (Default) ----------------- */
+.bannerDashboard.info {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+.bannerDashboard.info .bannerIcono {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+}
+
+/* ----------------- Variante Alerta / Warning (Sin ventas) ----------------- */
+.bannerDashboard.warning {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.bannerDashboard.warning .encabezadoBanner .bannerTitulo {
+  color: #92400e;
+}
+
+.bannerDashboard.warning .opcionBanner {
+  color: #92400e;
+}
+
+.bannerDashboard.warning .opcionBanner .iconoOpcion {
+  color: #d97706;
+}
+
+.bannerDashboard.warning .opcionBanner .leyendaOpcion {
+  color: #a16207;
+}
+
+.bannerDashboard.warning .opcionBanner .bannerTexto {
+  color: #78350f;
+}
+
+.bannerDashboard.warning .opcionBanner + .opcionBanner::before,
+.bannerDashboard.warning .encabezadoBanner + .opcionBanner::before {
+  background-color: #fde68a;
+}
+
+.bannerDashboard.warning .bannerBadgeFechas {
+  color: #b45309;
+  background-color: #fef3c7;
+  border-color: #fde68a;
+}
+
+.bannerDashboard.warning #opcionCalzadoBanner .bannerTexto {
+  color: #b45309;
+  background-color: #fef3c7;
+  border-color: #fde68a;
+}
+
+.bannerDashboard.warning .bannerIcono {
+  background-color: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+/* Pastillas complementarias */
+.bannerTagFiltro {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.bannerTagFiltro ion-icon {
+  font-size: 14px;
+  color: #0d6efd;
+}
+
+.bannerTagModelo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 3px 11px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.bannerTagModelo ion-icon {
+  font-size: 15px;
+  color: #2563eb;
 }
 
 /* ============================================================
@@ -197,6 +528,7 @@
 
 /* Cuerpo Scrollable con los Campos */
 .cuerpoFiltros {
+  font-family: 'Poppins', sans-serif;
   flex: 1;
   overflow-y: auto;
   padding: 24px;
@@ -207,6 +539,7 @@
 
 /* Estilo de cada campo */
 .camposfiltros {
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -229,6 +562,7 @@
 /* Estilos para los selectores modernos */
 .camposfiltros select {
   width: 100%;
+  font-family: 'Poppins', sans-serif;
   padding: 12px 16px;
   font-size: 14px;
   color: #1e293b;
@@ -238,7 +572,6 @@
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
   appearance: none;
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -258,6 +591,10 @@
   box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
 }
 
+.camposfiltros select,
+.camposfiltros select option {
+    font-family: 'Poppins', sans-serif;
+}
 /* Pie del Panel con Botones Fijos */
 .footerFiltros {
   padding: 18px 24px;
@@ -313,8 +650,8 @@
 /* ----------------------------------------------- Estilos para las cards de Indicadores ---------------------------------------*/
 .cardsIndicadores {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   width: 96%;
   margin: 0 auto;
   margin-bottom: 30px;
@@ -323,20 +660,24 @@
 .cardKPI {
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 18px 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  max-height: 150px;
-  min-height: 150px;
+  min-height: 135px;
+  min-width: 0;
   box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 
   & h3{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
 }
@@ -355,34 +696,679 @@
 }
 
 .datoConsultado {
-  font-size: 24px;
+  font-family: 'Poppins';
+  font-size: 26px;
   font-weight: 700;
   color: #333;
+  width: fit-content;
+  padding: 3px 0;
 }
+
+.comparativa {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  width: max-content; 
+  max-width: 100%;    /* Evita salirse del pad de la card */
+  box-sizing: border-box;
+
+  & span {
+    font-family: 'Poppins';
+  }
+
+  &.positivo{
+    background-color: rgb(107 254 156 / 20%);
+    color: #006d37;
+  }
+
+  &.negativo{
+    color: rgb(186 26 26);
+    background-color: rgb(255 218 214 / 50%);
+  }
+  &.sinResultados{
+    color: #5f6368;
+    background-color: rgb(95 99 104 / 12%);
+  }
+
+}
+
+.comparativaIcono{
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  & ion-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+
 
 /* Contenedor de los gráficos */
 .graficos {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas */
-    gap: 20px; /* Espacio entre gráficos */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    gap: 24px; /* Espacio entre gráficos */
     width: 96%;
     margin: 0 auto;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
+}
+
+.graficos h3, .graficos p {
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Tarjeta individual del gráfico */
 .cardGrafico {
     background-color: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    height: 380px;
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f1f5f9;
+    height: 410px;
+    min-width: 0; /* Previene desbordamiento en Flexbox/Grid */
+    width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardGrafico:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.graficoHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+
+  & p{
+    font-size: 12.5px;
+    color: #64748b;
+    font-style: italic;
+    margin: 2px 0 0 0;
+  }
 }
 
 /* Título del gráfico */
 .tituloGrafico {
-    margin: 0 0 15px 0;
-    font-size: 20px;
-    color: #333;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* Contenedor del gráfico */
+.contenedorGrafico {
+    flex: 1; /* Toma todo el espacio disponible */
+    width: 100%;
+    min-height: 0; 
+    min-width: 0;  
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+/* Asegurar que el canvas de ApexCharts respete el contenedor */
+.contenedorGrafico .apexcharts-canvas {
+    max-width: 100% !important;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   ESTILOS PARA TABLA TOP 5 CALZADOS MÁS VENDIDOS (POPPINS)
+   ============================================================ */
+
+.tablaTopCalzadosContenedor {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid #edf2f7;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+/* Scrollbar estilizado para la tabla */
+.tablaTopCalzadosContenedor::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.tablaTopCalzadosContenedor::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 4px;
+}
+
+.tablaTopCalzadosContenedor::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.tablaTopCalzadosContenedor::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+#tablaTopCalzados,
+#tablaCombinaciones {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    text-align: left;
+}
+
+#tablaTopCalzados thead,
+#tablaCombinaciones thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: #f8fafc;
+}
+
+#tablaTopCalzados thead th,
+#tablaCombinaciones thead th {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #475569;
+    padding: 12px 14px;
+    border-bottom: 1.5px solid #e2e8f0;
+    white-space: nowrap;
+    background-color: #f8fafc;
+}
+
+#tablaTopCalzados thead th:first-child {
+    border-top-left-radius: 8px;
+    text-align: center;
+    width: 70px;
+}
+
+#tablaTopCalzados thead th:nth-child(4) {
+    text-align: center;
+}
+
+#tablaTopCalzados thead th:last-child {
+    border-top-right-radius: 8px;
+    text-align: right;
+}
+
+/* Encabezados específicos para tablaCombinaciones */
+#tablaCombinaciones thead th:first-child {
+    border-top-left-radius: 8px;
+    text-align: left;
+    padding-left: 16px;
+}
+
+#tablaCombinaciones thead th:nth-child(2),
+#tablaCombinaciones thead th:nth-child(3) {
+    text-align: center;
+}
+
+#tablaCombinaciones thead th:last-child {
+    border-top-right-radius: 8px;
+    text-align: right;
+    padding-right: 16px;
+}
+
+#tablaTopCalzados tbody tr,
+#tablaCombinaciones tbody tr {
+    transition: background-color 0.15s ease;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+#tablaTopCalzados tbody tr:hover,
+#tablaCombinaciones tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+#tablaTopCalzados tbody td,
+#tablaCombinaciones tbody td {
+    font-family: 'Poppins', sans-serif;
+    padding: 11px 14px;
+    color: #334155;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+#tablaTopCalzados tbody tr:last-child td,
+#tablaCombinaciones tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Celdas específicas */
+.tdCodigo {
+    text-align: center;
+}
+
+.badgeCodigo {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    background-color: #f1f5f9;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.tdCalzado {
+    font-weight: 600;
+    color: #0f172a;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tdCategoria {
+    color: #475569;
+}
+
+.badgeCategoria {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #dbeafe;
+}
+
+.tdCantidad,
+.tdTalla {
+    text-align: center;
+}
+
+.badgeCantidad {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: #1e293b;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 2px 10px;
+    min-width: 28px;
+}
+
+.badgeTalla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: #0d6efd;
+    background-color: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 6px;
+    padding: 2px 10px;
+    min-width: 28px;
+}
+
+.tdColor {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.muestraColor {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0, 0, 0, 0.18);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+}
+
+.nombreColor {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #1e293b;
+    font-size: 13px;
+}
+
+.tdTotal {
+    text-align: right;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #0d6efd;
+    font-size: 13.5px;
+}
+
+.mensajeSinDatos {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13.5px;
+    color: #64748b;
+    font-weight: 500;
+    padding: 25px 20px;
+    margin: 0;
+}
+
+.swal2-container {
+    z-index: 99999 !important;
+}
+
+
+
+
+/* ============================================================
+   RESPONSIVIDAD INTEGRAL DE DASHBOARDS
+   ============================================================ */
+
+/* Pantallas medianas, tablets y laptops compactas (< 1024px) */
+@media (max-width: 1023px) {
+    .filtrosDashboard {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+        margin: 0 auto 18px auto;
+        width: 96%;
+    }
+
+    .filtrosBarraPrincipal {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filtrosRango {
+        flex: 1;
+        max-width: fit-content;
+    }
+
+    /* Mostrar botón flechita desplegable */
+    .btnToggleAcciones {
+        display: inline-flex;
+    }
+
+    /* Acciones secundarias colapsadas por defecto en pantallas pequeñas */
+    .filtrosAcciones {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #f1f5f9;
+        animation: slideDownFiltros 0.25s ease-out;
+    }
+
+    .filtrosAcciones.activo {
+        display: flex;
+    }
+
+    #filtroCalzado {
+        width: 100%;
+        box-sizing: border-box;
+
+    }
+
+    .btnFiltrosAvanzados {
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Tarjetas KPI en 2 columnas en tablets / móviles */
+    .cardsIndicadores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 24px;
+    }
+
+    .cardKPI {
+        padding: 16px 14px;
+        min-height: 125px;
+    }
+
+    .datoConsultado {
+        font-size: 22px;
+    }
+
+    /* Gráficos en 1 columna ocupando todo el ancho sin recortar su altura nativa */
+    .graficos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .cardGrafico {
+        min-height: 410px;
+        height: 410px; /* Mantener 410px para que el eje Y y leyendas no se recorten */
+        padding: 18px 20px;
+    }
+
+    .panelFiltrosLateral {
+        width: 380px;
+        max-width: 90vw;
+    }
+
+    /* Banner en formato acordeón para móviles y tablets */
+    .bannerDashboard {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 11px 16px;
+    }
+
+    .encabezadoBanner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+        user-select: none;
+        padding: 2px 0;
+    }
+
+    .encabezadoBanner .bannerTitulo {
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+    }
+
+    .encabezadoBanner #iconoFiltroBanner {
+        display: inline-flex;
+        font-size: 17px;
+        color: #64748b;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Opciones colapsadas por defecto en tablets y móviles */
+    .bannerDashboard:not(.abierto) .opcionBanner {
+        display: none !important;
+    }
+
+    /* Estado abierto/desplegado del banner en tablets y móviles */
+    .bannerDashboard.abierto {
+        gap: 8px;
+    }
+
+    .bannerDashboard.abierto .encabezadoBanner {
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f1f5f9;
+        margin-bottom: 4px;
+    }
+
+    .bannerDashboard.warning.abierto .encabezadoBanner {
+        border-bottom-color: #fde68a;
+    }
+
+    .bannerDashboard.abierto .encabezadoBanner #iconoFiltroBanner {
+        transform: rotate(180deg);
+        color: #2563eb;
+    }
+
+    .bannerDashboard.warning.abierto .encabezadoBanner #iconoFiltroBanner {
+        color: #d97706;
+    }
+
+    .bannerDashboard.abierto .opcionBanner {
+        display: flex !important;
+        align-items: center;
+        width: 100%;
+        padding: 4px 0;
+        animation: slideDownBanner 0.25s ease-out;
+    }
+
+    .bannerDashboard.abierto .opcionBanner + .opcionBanner::before,
+    .bannerDashboard.abierto .encabezadoBanner + .opcionBanner::before {
+        display: none;
+    }
+}
+
+@keyframes slideDownBanner {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownFiltros {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pantallas móviles pequeñas (< 480px) */
+@media (max-width: 480px) {
+    .filtrosDashboard {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .filtrosBarraPrincipal {
+        gap: 8px;
+    }
+
+    .filtrosRango {
+        gap: 2px;
+        padding: 2px;
+    }
+
+    .btnFiltrosGenerales {
+        padding: 5px 8px;
+        font-size: 11.5px;
+    }
+
+    .btnToggleAcciones {
+        padding: 5px 9px;
+        font-size: 12px;
+    }
+
+    .btnToggleAcciones span {
+        display: none; /* En móvil ultra compacto solo mostrar la flechita */
+    }
+
+    .bannerDashboard {
+        padding: 10px 14px;
+    }
+
+    .encabezadoBanner .bannerTitulo {
+        font-size: 12px;
+    }
+
+    .opcionBanner {
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .opcionBanner .bannerTexto {
+        font-size: 12px;
+    }
+
+    .bannerBadgeFechas {
+        font-size: 11px;
+        padding: 2px 8px;
+    }
+
+    .bannerTagFiltro,
+    .bannerTagModelo {
+        font-size: 11px;
+        padding: 2px 8px;
+    }
+
+    .cardsIndicadores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .cardKPI {
+        padding: 12px 10px;
+        min-height: 110px;
+    }
+
+    .cardKPI h3 {
+        font-size: 12.5px;
+    }
+
+    .datoConsultado {
+        font-size: 18px;
+    }
+
+    .comparativa {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+
+    .cardGrafico {
+        padding: 14px 14px;
+        min-height: 410px;
+        height: 410px;
+    }
+
+    .tituloGrafico {
+        font-size: 15px;
+    }
+
+    .panelFiltrosLateral {
+        width: 100vw;
+        max-width: 100vw;
+    }
 }

@@ -1,11 +1,8 @@
 const btnMostrarFiltros = document.getElementById('mostrarFiltrosProduccion');
-const contenedorFiltros = document.querySelector('.contenedorFiltrosProduccion');
+const contenedorFiltros = document.getElementById('filtrosInventarioProduccion');
 btnMostrarFiltros.addEventListener('click', function() {
-    if (contenedorFiltros.style.display === 'grid') {
-        contenedorFiltros.style.display = 'none';
-    } else {
-        contenedorFiltros.style.display = 'grid';
-    }
+    contenedorFiltros.hidden = !contenedorFiltros.hidden;
+    btnMostrarFiltros.setAttribute('aria-expanded', String(!contenedorFiltros.hidden));
 });
 
 
@@ -29,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ...filtros
         });
 
-        fetch(`../../php/configuraciones/seleccionProduccion.php?${params.toString()}`)
+        fetch(`../../php/configuraciones/consultarDatos/seleccionProduccion.php?${params.toString()}`)
             .then(response => response.json())
             .then(data => {
                 const { datos, totalPaginas, paginaActual: paginaResp } = data;
@@ -87,4 +84,3 @@ document.addEventListener('DOMContentLoaded', function () {
         cargarDatos(paginaActual);
     });
 });
-
