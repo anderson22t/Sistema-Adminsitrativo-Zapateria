@@ -27,9 +27,9 @@ Consulta el stock de materiales disponibles (código, descripción y cantidad), 
 Contiene dos vistas: **Reporte de Pedidos**, que muestra el estado, fechas y datos de entrega de cada pedido con posibilidad de consultar el detalle completo y actualizar el estado; y el Reporte de Ventas, que presenta un resumen de ventas por forma de pago  con cantidades y montos por período.
 
 ### Inteligencia de Negocios
-Incluye dos dashboards:
-- **Análisis General**: indicadores KPI y gráficos de evolución de ventas, top 5 calzados, ventas por categoría y por talla, con filtros por período, canal de venta y tipo de venta.
-- **Análisis Específico por Producto**: indicadores y gráficas detalladas por modelo (ventas anuales, por color, por talla), con filtro de modelo, período y filtros avanzados. Permite exportar el análisis a PDF.
+Incorpora un módulo de inteligencia de negocios compuesto por dos dashboards interactivos para el análisis de ventas. El dashboard de Análisis General de Ventas presenta una visión consolidada del comportamiento de las ventas mediante indicadores clave, comparaciones entre periodos y gráficos que permiten identificar tendencias. Por su parte, el dashboard de Análisis Específico por Producto permite examinar el desempeño de un modelo de calzado seleccionado, analizando sus ventas según tallas y colores para identificar las variantes con mayor demanda.
+
+Ambos dashboards cuentan con filtros por periodo, canal y tipo de venta, lo que permite consultar la información según diferentes criterios. Además, incluyen la opción de exportar los resultados en formato PDF, facilitando la generación y conservación de reportes para su consulta posterior.
 
 ## Tecnologías utilizadas
 
